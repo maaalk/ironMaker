@@ -1,11 +1,12 @@
 package br.com.direfrog.entidade;
 
 public class Usuario {
-	private int id;
+	private Integer id;
 	private String nome;
 	private String login;
 	private String senha;
-	public int getId() {
+	
+	public Integer getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -30,7 +31,14 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
-	
+	public String toString(){
+		String user="";
+		user+="ID :"+getId()+"\n";
+		user+="Nome :"+getNome()+"\n";
+		user+="Login :"+getLogin()+"\n";
+		user+="Senha :"+getSenha()+"\n";
+		return user;
+	}
 	
 	
 }
