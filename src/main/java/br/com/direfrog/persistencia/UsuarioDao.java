@@ -127,4 +127,34 @@ public class UsuarioDao {
 		return lista;
 	}
 	
+	/**
+	 * Verifica se há registro na tabela Usuário com login e senha especificados
+	 * @param login
+	 * @param senha
+	 * @return objeto Usuário autenticado
+	 */
+	public Usuario autentica(String login, String senha){
+		Usuario userRetorno = null;
+		String sql="select * from usuario where login=? and senha=?";
+		try(PreparedStatement preparador = conexao.prepareStatement(sql)){
+			preparador.setString(1,login);
+			preparador.setString(2,senha);
+			ResultSet resultado = preparador.executeQuery();
+			if (resultado.next()){				
+				userRetorno=new Usuario();
+				userRetorno.setId(resultado.getInt("id"));
+				userRetorno.setNome(resultado.getString("nome"));
+				userRetorno.setLogin(resultado.getString("login"));
+				userRetorno.setSenha(resultado.getString("senha"));
+			} 
+			
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return userRetorno;
+	}
+	
+	
 }

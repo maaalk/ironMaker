@@ -10,10 +10,22 @@ public class UsuarioDaoTest {
 
 	public static void main(String[] args) {
 //		testeBuscaPorId(10);
-		testeBuscaTodos();
+//		testeBuscaTodos();
+		testeAutentica("renatatm","1234");
 	}
 	
 	
+	private static void testeAutentica(String login, String senha) {
+		Usuario user = new UsuarioDao().autentica(login, senha);
+		if (user!=null){
+			System.out.println("autenticação com sucesso");
+			System.out.println(user);
+		}else{
+			System.out.println("Autenticação Falhou");
+		}
+	}
+
+
 	private static void testeBuscaTodos() {
 		List<Usuario> lista = new UsuarioDao().buscaTodos();
 		for (Usuario u: lista ){
