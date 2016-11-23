@@ -40,7 +40,7 @@ public class UsuarioController extends HttpServlet {
 		if (action.equals("editar")){
 			Usuario user = new Usuario();
 			UsuarioDao userDao = new UsuarioDao();
-			user = userDao.buscaPorId(Integer.parseInt(req.getParameter("id")));
+			user = userDao.buscar(Integer.parseInt(req.getParameter("id")));
 			req.setAttribute("user", user);
 			RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/editausuario.jsp");
 			dispatcher.forward(req, resp);

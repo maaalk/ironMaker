@@ -40,7 +40,7 @@ public class UsuarioDaoTest {
 	private static void testeBuscaPorId(int id) {
 		Usuario user = new Usuario();
 		UsuarioDao userDao = new UsuarioDao();
-		user=userDao.buscaPorId(id);
+		user=userDao.buscar(id);
 		System.out.println(user);
 		
 	}

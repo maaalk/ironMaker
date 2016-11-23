@@ -13,7 +13,7 @@ public class UsuarioDao {
 
 	private Connection conexao = ConexaoFactory.getConnection();
 	public void cadastrar(Usuario user) {
-		String sql="insert into usuario (nome, login, senha) values (?,?,?)";
+		String sql="insert into usuario (nome, login, senha) values (?,?,md5(?))";
 		//criando statement
 		try (PreparedStatement preparador = conexao.prepareStatement(sql)){	
 			preparador.setString(1, user.getNome());
@@ -29,7 +29,7 @@ public class UsuarioDao {
 		}
 	}
 	public void alterar(Usuario user) {
-		String sql="update usuario set nome=?, login=?, senha=? where id=?";
+		String sql="update usuario set nome=?, login=?, senha=md5(?) where id=?";
 		//criando statement
 		try (PreparedStatement preparador = conexao.prepareStatement(sql)){	
 			preparador.setString(1, user.getNome());
@@ -61,6 +61,8 @@ public class UsuarioDao {
 		}
 		
 	}
+	
+	
 	public void salvar(Usuario user) {
 		if (user.getId()!=null && user.getId()!=0 ){
 			alterar(user);
@@ -76,7 +78,7 @@ public class UsuarioDao {
 	 * @param id é um inteiro que representa a chave primária id da tabela usuario
 	 * @return objeto usuario com os campos preenchidos ou null se a entrada não existir 
 	 */
-	public Usuario buscaPorId(int id) {
+	public Usuario buscar(int id) {
 		Usuario userRetorno = null;
 		
 		String sql="select * from usuario where id=?";
@@ -133,12 +135,12 @@ public class UsuarioDao {
 	 * @param senha
 	 * @return objeto Usuário autenticado
 	 */
-	public Usuario autentica(String login, String senha){
+	public Usuario autentica(Usuario user){
 		Usuario userRetorno = null;
-		String sql="select * from usuario where login=? and senha=?";
+		String sql="select * from usuario where login=? and senha=md5(?)";
 		try(PreparedStatement preparador = conexao.prepareStatement(sql)){
-			preparador.setString(1,login);
-			preparador.setString(2,senha);
+			preparador.setString(1,user.getLogin());
+			preparador.setString(2,user.getSenha());
 			ResultSet resultado = preparador.executeQuery();
 			if (resultado.next()){				
 				userRetorno=new Usuario();

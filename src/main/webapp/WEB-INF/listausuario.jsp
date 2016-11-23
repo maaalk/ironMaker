@@ -18,6 +18,7 @@
 
 </head>
 <body>
+<%@include file="menu.jsp" %>
 <%	List<Usuario> lista = (List<Usuario>)request.getAttribute("listaUsuario");%>
 
 <table border=1>
