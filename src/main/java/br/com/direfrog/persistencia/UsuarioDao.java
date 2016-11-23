@@ -62,7 +62,7 @@ public class UsuarioDao {
 		
 	}
 	public void salvar(Usuario user) {
-		if (user.getId()!=null){
+		if (user.getId()!=null && user.getId()!=0 ){
 			alterar(user);
 		}else{
 			cadastrar(user);

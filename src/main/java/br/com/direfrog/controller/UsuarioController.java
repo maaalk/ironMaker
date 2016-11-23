@@ -3,6 +3,8 @@ package br.com.direfrog.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.print.attribute.standard.ReferenceUriSchemesSupported;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,16 +25,35 @@ public class UsuarioController extends HttpServlet {
 		System.out.println(action);
 		if (action.equals("list")){
 			System.out.println("entrou");
-			List<Usuario> lista = new UsuarioDao().buscaTodos();
-			System.out.println("Action Listar");
-			resp.getWriter().print("Lista!");
-		}else if(action.equals("excluir")){
+			List<Usuario> listaUsuario = new UsuarioDao().buscaTodos();
+			req.setAttribute("listaUsuario", listaUsuario);
+			RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/listausuario.jsp");
+			dispatcher.forward(req, resp);
+		}	
+		if(action.equals("excluir")){
 			Usuario user = new Usuario();
 			user.setId(Integer.parseInt(req.getParameter("id")));
 			new UsuarioDao().excluir(user);
 			System.out.println("Action Excluir");
-			resp.getWriter().print("Excluiu "+user);
-			
+			resp.sendRedirect("usuariocontroller.do?action=list");
+		}
+		if (action.equals("editar")){
+			Usuario user = new Usuario();
+			UsuarioDao userDao = new UsuarioDao();
+			user = userDao.buscaPorId(Integer.parseInt(req.getParameter("id")));
+			req.setAttribute("user", user);
+			RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/editausuario.jsp");
+			dispatcher.forward(req, resp);
+		}
+		if (action.equals("novo")){
+			Usuario user = new Usuario();
+			user.setId(0);
+			user.setLogin("");
+			user.setNome("");
+			user.setSenha("");
+			req.setAttribute("user", user);
+			RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/editausuario.jsp");
+			dispatcher.forward(req, resp);
 		}
 					
 	}
@@ -45,6 +66,7 @@ public class UsuarioController extends HttpServlet {
 		String login = req.getParameter("login");
 		String senha = req.getParameter("senha");
 		Usuario user=new Usuario();
+		System.out.println(req.getParameter("id")+"ID");
 		if (req.getParameter("id")!=""){
 			user.setId(Integer.parseInt(req.getParameter("id")));
 		}
@@ -55,7 +77,7 @@ public class UsuarioController extends HttpServlet {
 		user.setSenha(senha);
 		UsuarioDao userdao = new UsuarioDao();
 		userdao.salvar(user);
-		resp.getWriter().print("Sucesso!");
+		resp.sendRedirect("usuariocontroller.do?action=list");
 	}
 	
 }
