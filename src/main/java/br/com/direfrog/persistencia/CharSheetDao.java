@@ -8,16 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.direfrog.entidade.CharSheet;
-import br.com.direfrog.entidade.Usuario;
 
-public class CharSheetDao implements Dao {
+public class CharSheetDao implements InterfaceGenericDAO <CharSheet> {
 
 	private Connection conexao = ConexaoFactory.getConnection();
 
 	@Override
-	public void cadastrar(Object obj) {
-		CharSheet character = (CharSheet) obj;
-
+	public void cadastrar(CharSheet character) {
+		
 		//criando statement
 		String sql="insert into charsheet (nome, phy, spd, str, agi, prw, poi, intel, arc, per)"
 				+ " values (?,?,?,?,?,?,?,?,?,?)";
@@ -46,12 +44,12 @@ public class CharSheetDao implements Dao {
 	}
 
 	@Override
-	public void excluir(Object obj) {
-		CharSheet c = (CharSheet) obj;
-		String sql="delete from charsheet where id=?";
+	public void excluir(int id) {
+
+		String sql="delete from charsheet where id="+id;
 		//criando statement
 		try (PreparedStatement preparador = conexao.prepareStatement(sql)){	
-			preparador.setInt(1, c.getId());
+
 			//executando statement
 			preparador.execute();
 			//encerrando objeto preparador
@@ -63,9 +61,7 @@ public class CharSheetDao implements Dao {
 	}
 
 	@Override
-	public void alterar(Object obj) {
-		CharSheet character = (CharSheet) obj;
-
+	public void alterar(CharSheet character) {
 		//criando statement
 		String sql="update charsheet set nome=?, phy=?, spd=?, str=?, agi=?, prw=?, poi=?, intel=?, arc=?, per=? where id=?";
 		
@@ -96,8 +92,7 @@ public class CharSheetDao implements Dao {
 		
 	}
 	
-	public void salvar(Object obj) {
-		CharSheet character = (CharSheet) obj;
+	public void salvar(CharSheet character) {
 		if (character.getId()!=null && character.getId()!=0 ){
 			alterar(character);
 		}else{
@@ -106,7 +101,7 @@ public class CharSheetDao implements Dao {
 	}
 
 	@Override
-	public Object buscar(int id) {
+	public CharSheet buscar(int id) {
 		CharSheet character = null;
 		String sql="select * from charsheet where id=?";
 		try (PreparedStatement preparador = conexao.prepareStatement(sql)){	
@@ -134,7 +129,7 @@ public class CharSheetDao implements Dao {
 		return character;
 	}
 	
-	public List<CharSheet> buscaTodos() {
+	public List<CharSheet> buscarTodos() {
 		CharSheet character = null;
 		List<CharSheet> lista = new ArrayList<CharSheet>();
 		String sql="select * from charsheet";
@@ -161,6 +156,5 @@ public class CharSheetDao implements Dao {
 		}
 		return lista;
 	}
-	
-	
+
 }

@@ -1,8 +1,10 @@
 package br.com.direfrog.entidade;
 
+import java.util.List;
+
 public class CharSheet {
 	private String name;
-	private Usuario user;
+	//private Usuario user;
 	private Integer id;
 	
 	//primary and secondary attibutes
@@ -16,6 +18,9 @@ public class CharSheet {
 	private int arc;
 	private int per;
 	
+	private List<Carreira> listaCarreiras;
+	private Arquetipo arquetipo;
+	private Raca raca;
 	
 	//derived attributes
 		/*private int baseDefense;
@@ -31,12 +36,6 @@ public class CharSheet {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Usuario getUser() {
-		return user;
-	}
-	public void setUser(Usuario user) {
-		this.user = user;
 	}
 	public int getPhy() {
 		return phy;
@@ -103,14 +102,10 @@ public class CharSheet {
 	
 	@Override
 	public String toString() {
-		return "CharSheet [name=" + name + ", user=" + user + ", id=" + id + ", phy=" + phy + ", spd=" + spd + ", str="
-				+ str + ", agi=" + agi + ", prw=" + prw + ", poi=" + poi + ", intel=" + intel + ", arc=" + arc
-				+ ", per=" + per + "]";
+		return "CharSheet [name=" + name + ", id=" + id + ", phy=" + phy + ", spd=" + spd + ", str=" + str + ", agi="
+				+ agi + ", prw=" + prw + ", poi=" + poi + ", intel=" + intel + ", arc=" + arc + ", per=" + per + "]";
 	}
-	
-	
-	
-	
+		
 	
 	
 

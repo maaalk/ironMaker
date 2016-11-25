@@ -28,7 +28,7 @@ public class CharacterDaoTest {
 		//testaBuscar(c);
 		//testaBuscaTodos();
 		//testaSalvar(c);
-		//testaExcluir(c);
+		//testaExcluir(c.getId());
 
 	}
 	
@@ -52,7 +52,7 @@ public class CharacterDaoTest {
 	
 	public static void testaBuscaTodos(){
 		CharSheetDao cdao = new CharSheetDao();
-		List<CharSheet> lista = cdao.buscaTodos();
+		List<CharSheet> lista = cdao.buscarTodos();
 		for (CharSheet c: lista){
 			System.out.println(c);
 		}
@@ -70,9 +70,9 @@ public class CharacterDaoTest {
 		System.out.println("salvar");
 	}
 	
-	public static void testaExcluir(CharSheet c){
+	public static void testaExcluir(int id){
 		CharSheetDao cdao = new CharSheetDao();
-		cdao.excluir(c);
+		cdao.excluir(id);
 		System.out.println("Excluir");
 	}
 
