@@ -10,7 +10,7 @@ public class ConexaoFactory {
 		
 		try {
 			Class.forName("org.postgresql.Driver");
-			return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ironmaker", "postgres", "postgres");
+			return DriverManager.getConnection("jdbc:postgresql://localhost:5432/ironmaker", "postgres", "root");
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} catch (ClassNotFoundException e) {

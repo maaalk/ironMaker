@@ -19,6 +19,16 @@ public class Raca {
 	private int arc;
 	private int per;
 
+	//Atributos máximos da raça
+	private int maxPhy;
+	private int maxSpd;
+	private int maxStr;
+	private int maxAgi;
+	private int maxPrw;
+	private int maxPoi;
+	private int maxIntel;
+	private int maxArc;
+	private int maxPer;
 	/*
 	 * TODO pode ficar melhor criar uma classe chamada BeneficioRacial contendo
 	 * estas duas listas?
@@ -136,6 +146,78 @@ public class Raca {
 
 	public void setPer(int per) {
 		this.per = per;
+	}
+
+	public int getMaxPhy() {
+		return maxPhy;
+	}
+
+	public void setMaxPhy(int maxPhy) {
+		this.maxPhy = maxPhy;
+	}
+
+	public int getMaxSpd() {
+		return maxSpd;
+	}
+
+	public void setMaxSpd(int maxSpd) {
+		this.maxSpd = maxSpd;
+	}
+
+	public int getMaxStr() {
+		return maxStr;
+	}
+
+	public void setMaxStr(int maxStr) {
+		this.maxStr = maxStr;
+	}
+
+	public int getMaxAgi() {
+		return maxAgi;
+	}
+
+	public void setMaxAgi(int maxAgi) {
+		this.maxAgi = maxAgi;
+	}
+
+	public int getMaxPrw() {
+		return maxPrw;
+	}
+
+	public void setMaxPrw(int maxPrw) {
+		this.maxPrw = maxPrw;
+	}
+
+	public int getMaxPoi() {
+		return maxPoi;
+	}
+
+	public void setMaxPoi(int maxPoi) {
+		this.maxPoi = maxPoi;
+	}
+
+	public int getMaxIntel() {
+		return maxIntel;
+	}
+
+	public void setMaxIntel(int maxIntel) {
+		this.maxIntel = maxIntel;
+	}
+
+	public int getMaxArc() {
+		return maxArc;
+	}
+
+	public void setMaxArc(int maxArc) {
+		this.maxArc = maxArc;
+	}
+
+	public int getMaxPer() {
+		return maxPer;
+	}
+
+	public void setMaxPer(int maxPer) {
+		this.maxPer = maxPer;
 	}
 
 	
