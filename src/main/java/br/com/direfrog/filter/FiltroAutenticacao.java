@@ -35,15 +35,7 @@ public class FiltroAutenticacao implements Filter{
 		
 		
 		System.out.println(uri);
-		
-		if(sessao!=null || uri.indexOf("login.html")!=-1 || uri.indexOf("autenticador.do")!=-1 ){
-			chain.doFilter(request, response);
-			System.out.println("Filtro"+sessao);
-		} else {
-			httpResponse.sendRedirect("login.html");
-		}
-		
-		
+		chain.doFilter(request, response);		
 	}
 
 	@Override
