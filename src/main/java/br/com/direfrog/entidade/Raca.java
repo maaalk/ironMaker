@@ -9,15 +9,15 @@ public class Raca {
 	private String descricao;
 
 	// Atributos iniciais das raças
-	private int phy;
-	private int spd;
-	private int str;
-	private int agi;
-	private int prw;
-	private int poi;
-	private int intel;
-	private int arc;
-	private int per;
+	private int basePhy;
+	private int baseSpd;
+	private int baseStr;
+	private int baseAgi;
+	private int basePrw;
+	private int basePoi;
+	private int baseIntel;
+	private int baseArc;
+	private int basePer;
 
 	//Atributos máximos da raça
 	private int maxPhy;
@@ -77,75 +77,75 @@ public class Raca {
 	}
 
 	public int getPhy() {
-		return phy;
+		return basePhy;
 	}
 
 	public void setPhy(int phy) {
-		this.phy = phy;
+		this.basePhy = phy;
 	}
 
 	public int getSpd() {
-		return spd;
+		return baseSpd;
 	}
 
 	public void setSpd(int spd) {
-		this.spd = spd;
+		this.baseSpd = spd;
 	}
 
 	public int getStr() {
-		return str;
+		return baseStr;
 	}
 
 	public void setStr(int str) {
-		this.str = str;
+		this.baseStr = str;
 	}
 
 	public int getAgi() {
-		return agi;
+		return baseAgi;
 	}
 
 	public void setAgi(int agi) {
-		this.agi = agi;
+		this.baseAgi = agi;
 	}
 
 	public int getPrw() {
-		return prw;
+		return basePrw;
 	}
 
 	public void setPrw(int prw) {
-		this.prw = prw;
+		this.basePrw = prw;
 	}
 
 	public int getPoi() {
-		return poi;
+		return basePoi;
 	}
 
 	public void setPoi(int poi) {
-		this.poi = poi;
+		this.basePoi = poi;
 	}
 
 	public int getIntel() {
-		return intel;
+		return baseIntel;
 	}
 
 	public void setIntel(int intel) {
-		this.intel = intel;
+		this.baseIntel = intel;
 	}
 
 	public int getArc() {
-		return arc;
+		return baseArc;
 	}
 
 	public void setArc(int arc) {
-		this.arc = arc;
+		this.baseArc = arc;
 	}
 
 	public int getPer() {
-		return per;
+		return basePer;
 	}
 
 	public void setPer(int per) {
-		this.per = per;
+		this.basePer = per;
 	}
 
 	public int getMaxPhy() {
