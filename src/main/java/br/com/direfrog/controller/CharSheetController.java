@@ -18,9 +18,9 @@ public class CharSheetController {
 	
 	private CharSheet cs = new CharSheet();
 	
-	public void salvar() throws ControllerException{
+	public void save() throws ControllerException{
 		try{
-			csService.salvar(cs);
+			csService.save(cs);
 		}catch (ServiceException e){
 			throw new ControllerException("Não salvou",e);
 		}
