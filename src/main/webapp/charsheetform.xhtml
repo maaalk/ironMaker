@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Criar Ficha</title>
+</head>
+
+<body>
+<h:form>
+	
+	Name: <h:inputText value="#{csCtrl.cs.name}" />
+	Race: <h:inputText value="#{csCtrl.cs.race}" />
+	xp: <h:inputText value="#{csCtrl.cs.xp}" /> 
+	<table class="tg">
+  <tr>
+    <th class="tg-9hbo">Primary Stats</th>
+    <th class="tg-9hbo">Secondary Stats</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" rowspan="2">FIS <h:inputText value="#{csCtrl.cs.phy}" /> </td>
+    <td class="tg-yw4l">FOR <h:inputText value="#{csCtrl.cs.str}" /></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">VEL <h:inputText value="#{csCtrl.cs.spd}" /></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" rowspan="2">AGI <h:inputText value="#{csCtrl.cs.agi}" /></td>
+    <td class="tg-yw4l">MAE <h:inputText value="#{csCtrl.cs.prw}" /></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">DES <h:inputText value="#{csCtrl.cs.poi}" /></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" rowspan="2">INT <h:inputText value="#{csCtrl.cs.intel}" /></td>
+    <td class="tg-yw4l">ARC <h:inputText value="#{csCtrl.cs.arc}" /></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">PER <h:inputText value="#{csCtrl.cs.per}" /></td>
+  </tr>
+</table>
+	
+	
+	<h:commandButton action="#{csCtrl.salvar()}" value="Salvar" />
+</h:form>
+
+</body>
+</html>

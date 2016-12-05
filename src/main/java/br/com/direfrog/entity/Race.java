@@ -1,4 +1,4 @@
-package br.com.direfrog.entidade;
+package br.com.direfrog.entity;
 
 import java.util.Arrays;
 import java.util.List;

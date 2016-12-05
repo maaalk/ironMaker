@@ -1,4 +1,4 @@
-package br.com.direfrog.entidade;
+package br.com.direfrog.entity;
 
 public class raceFactory {
 	public static Race generateRace(String raceName){
