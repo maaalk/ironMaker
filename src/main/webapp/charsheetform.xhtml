@@ -1,44 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
 
-<head>
-<meta charset="ISO-8859-1" />
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:head>
+<meta charset="ISO-8859-1"/>
 <title>Criar Ficha</title>
+<script type="text/javascript">  
 
-<script> <![CDATA[
 	function loadThis(value){
 		window.alert("Ola"+value)
 	}
-	function myFunction() {
-		  // Declare variables 
-		  var input, filter, table, tr, td, i;
-		  input = document.getElementById("myInput");
-		  filter = input.value.toUpperCase();
-		  table = document.getElementById("archetype_benefit_table");
-		  tr = table.getElementsByTagName("tr");
 
-		  // Loop through all table rows, and hide those who don't match the search query
-		  for (i = 0; i < tr.length; i++) {
-		    td = tr[i].getElementsByTagName("td")[0];
-		    if (td) {
-		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-		        tr[i].style.display = "";
-		      } else {
-		        tr[i].style.display = "none";
-		      }
-		    } 
-		  }
-		}
-	]]>
-</script>
-</head>
+</script>  
+</h:head>
 
-<body>
-	<h:form>
-		<h:selectOneMenu value="#{csCtrl.cs.archetype}" onmousedown="this.value" onchange="loadThis(this.value)">
+<h:body>
+<h:form >
+
+<h:selectOneMenu value="#{csCtrl.cs.archetype}" onmousedown="this.value" onchange="loadThis(this.value)">
 			<f:selectItems value="#{archetypeController.archetypeList}"
 				var="archetype" itemLabel="#{archetype.name}" />
 		</h:selectOneMenu>
@@ -61,23 +44,103 @@
 			</tr>
 			</h:dataTable>
 
+<p:fieldset legend="Basic" style="margin-bottom:20px">
+	Name: <h:inputText value="#{csCtrl.cs.name}" /> 
+	xp: <p:spinner value="#{csCtrl.cs.xp}" size="2" min="0" max="150" onchange="this.form.submit()" valueChangeListener="#{csCtrl.defineLevel}"/>  
+	lvl: #{csCtrl.level} <br/>
+</p:fieldset>
 
-		
-		
-	Name: <h:inputText value="#{csCtrl.cs.name}" />
-	Race: <h:inputText value="#{csCtrl.cs.race}" />
-	xp: <h:inputText value="#{csCtrl.cs.xp}" />
-		<table class="tg">
-			<tr>
-				<th class="tg-9hbo">Primary Stats</th>
-				<th class="tg-9hbo">Secondary Stats</th>
-			</tr>
+<p:fieldset legend="Race" style="margin-bottom:20px">
+	Race: <p:selectOneMenu value="#{csCtrl.cs.race}" onchange="submit()" valueChangeListener="#{csCtrl.loadStats2}">
+		<f:selectItem itemValue="selection" itemLabel="Select a race"/>
+		<f:selectItem itemValue="human" itemLabel="Human"/>
+		<f:selectItem itemValue="trollkin" itemLabel="Trollkin"/>
+	</p:selectOneMenu>
+</p:fieldset>
+<br/>
 
-		</table>
+<p:fieldset legend="Stats" style="margin-bottom:20px">
+<p:panelGrid >
+<f:facet name="header">
+	<p:row>
+		<p:column colspan="4">Stats</p:column>
+	</p:row>
+	<p:row>
+		<p:column colspan="2">Primary</p:column>
+		<p:column colspan="2">Secondary</p:column>
+	</p:row>
+</f:facet>	
+  <p:row>
+    <p:column  rowspan="2">
+    	PHY 
+     </p:column>
+     <p:column rowspan="2">
+    	<p:spinner size="2" value="#{csCtrl.stats.basePhy}" />  /#{csCtrl.stats.maxPhy[csCtrl.level]}
+     </p:column>
+    <p:column >
+    	STR
+     </p:column>
+     <p:column> 
+    	<p:spinner size="2" value="#{csCtrl.stats.baseStr}" /> /#{csCtrl.stats.maxStr[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column >
+    	SPD 
+     </p:column>
+     <p:column>
+    	<p:spinner size="2" value="#{csCtrl.stats.baseSpd}" /> /#{csCtrl.stats.maxSpd[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column  rowspan="2">
+    	AGI 
+     </p:column>
+     <p:column rowspan="2">
+    	<p:spinner size="2" value="#{csCtrl.stats.baseAgi}" />  /#{csCtrl.stats.maxAgi[csCtrl.level]}
+     </p:column>
+    <p:column >
+    	PRW
+     </p:column>
+     <p:column> 
+    	<p:spinner size="2" value="#{csCtrl.stats.basePrw}" /> /#{csCtrl.stats.maxPrw[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column >
+    	POI 
+     </p:column>
+     <p:column>
+    	<p:spinner size="2" value="#{csCtrl.stats.basePoi}" /> /#{csCtrl.stats.maxPoi[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column  rowspan="2">
+    	INT 
+     </p:column>
+     <p:column rowspan="2">
+    	<p:spinner size="2" value="#{csCtrl.stats.baseIntel}" />  /#{csCtrl.stats.maxIntel[csCtrl.level]}
+     </p:column>
+    <p:column >
+    	ARC
+     </p:column>
+     <p:column> 
+    	<p:spinner size="2" value="#{csCtrl.stats.baseArc}" /> /#{csCtrl.stats.maxArc[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column >
+    	PER 
+     </p:column>
+     <p:column>
+    	<p:spinner size="2" value="#{csCtrl.stats.basePer}" /> /#{csCtrl.stats.maxPer[csCtrl.level]}
+    </p:column>
+  </p:row>
+</p:panelGrid>
+</p:fieldset>
+	
+	<h:commandButton actionListener="#{csCtrl.save()}" value="Salvar" />
+</h:form>
 
-
-		<h:commandButton action="#{csCtrl.save()}" value="Salvar" />
-	</h:form>
-
-</body>
+</h:body>
 </html>
