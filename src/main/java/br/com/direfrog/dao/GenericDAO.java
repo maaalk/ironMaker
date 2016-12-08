@@ -3,6 +3,7 @@ package br.com.direfrog.dao;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -51,6 +52,7 @@ public abstract class GenericDAO <Objeto>{
 	}
 
 	public Objeto findById(Integer id) {
+		//return em.getReference(param, id);
 		return em.find(param, id);
 	}
 
@@ -62,5 +64,5 @@ public abstract class GenericDAO <Objeto>{
 		Query q = em.createQuery("select obj from "+className+" obj");
 		return q.getResultList();
 	}
-
+	
 }

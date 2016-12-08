@@ -1,51 +1,83 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:f="http://java.sun.com/jsf/core">
-      
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
 <head>
-<meta charset="ISO-8859-1"/>
+<meta charset="ISO-8859-1" />
 <title>Criar Ficha</title>
+
+<script> <![CDATA[
+	function loadThis(value){
+		window.alert("Ola"+value)
+	}
+	function myFunction() {
+		  // Declare variables 
+		  var input, filter, table, tr, td, i;
+		  input = document.getElementById("myInput");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("archetype_benefit_table");
+		  tr = table.getElementsByTagName("tr");
+
+		  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+		    td = tr[i].getElementsByTagName("td")[0];
+		    if (td) {
+		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+		        tr[i].style.display = "";
+		      } else {
+		        tr[i].style.display = "none";
+		      }
+		    } 
+		  }
+		}
+	]]>
+</script>
 </head>
 
 <body>
-<h:form>
+	<h:form>
+		<h:selectOneMenu value="#{csCtrl.cs.archetype}" onmousedown="this.value" onchange="loadThis(this.value)">
+			<f:selectItems value="#{archetypeController.archetypeList}"
+				var="archetype" itemLabel="#{archetype.name}" />
+		</h:selectOneMenu>
+
 	
+			<h:inputText id="myInput" onkeyup="myFunction()"></h:inputText>
+			<h:dataTable id="archetype_benefit_table" border="1"
+				value="#{archetypeBenefitController.benefitList}"
+				var="benefit">
+				<tr>
+				<f:facet name="header">List</f:facet>
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+				#{benefit.name}
+			</h:column>
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+				kk
+			</h:column>
+			</tr>
+			</h:dataTable>
+
+
+		
+		
 	Name: <h:inputText value="#{csCtrl.cs.name}" />
 	Race: <h:inputText value="#{csCtrl.cs.race}" />
-	xp: <h:inputText value="#{csCtrl.cs.xp}" /> 
-	<table class="tg">
-  <tr>
-    <th class="tg-9hbo">Primary Stats</th>
-    <th class="tg-9hbo">Secondary Stats</th>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" rowspan="2">FIS <h:inputText value="#{csCtrl.cs.phy}" /> </td>
-    <td class="tg-yw4l">FOR <h:inputText value="#{csCtrl.cs.str}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">VEL <h:inputText value="#{csCtrl.cs.spd}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" rowspan="2">AGI <h:inputText value="#{csCtrl.cs.agi}" /></td>
-    <td class="tg-yw4l">MAE <h:inputText value="#{csCtrl.cs.prw}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">DES <h:inputText value="#{csCtrl.cs.poi}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" rowspan="2">INT <h:inputText value="#{csCtrl.cs.intel}" /></td>
-    <td class="tg-yw4l">ARC <h:inputText value="#{csCtrl.cs.arc}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">PER <h:inputText value="#{csCtrl.cs.per}" /></td>
-  </tr>
-</table>
-	
-	
-	<h:commandButton action="#{csCtrl.save()}" value="Salvar" />
-</h:form>
+	xp: <h:inputText value="#{csCtrl.cs.xp}" />
+		<table class="tg">
+			<tr>
+				<th class="tg-9hbo">Primary Stats</th>
+				<th class="tg-9hbo">Secondary Stats</th>
+			</tr>
+
+		</table>
+
+
+		<h:commandButton action="#{csCtrl.save()}" value="Salvar" />
+	</h:form>
 
 </body>
 </html>
