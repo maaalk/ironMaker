@@ -2,66 +2,117 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:ui="http://java.sun.com/jsf/facelets" 
       xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
       
-<head>
+<h:head>
 <meta charset="ISO-8859-1"/>
 <title>Criar Ficha</title>
 <script type="text/javascript">  
   //Script JS  
 </script>  
-</head>
+</h:head>
 
-<body>
+<h:body>
 <h:form >
 
-	
+<p:fieldset legend="Basic" style="margin-bottom:20px">
 	Name: <h:inputText value="#{csCtrl.cs.name}" /> 
-	xp: <h:inputText value="#{csCtrl.cs.xp}"  onchange="this.form.submit()" valueChangeListener="#{csCtrl.defineLevel}"/>  
-	lvl: <h:inputText value="#{csCtrl.level}" /> <br/>
-	Race: <h:selectOneMenu value="#{csCtrl.cs.race}" onchange="submit()" valueChangeListener="#{csCtrl.loadStats2}">
-		<f:selectItem itemValue="selection" itemLabel="Selecione"/>
+	xp: <p:spinner value="#{csCtrl.cs.xp}" size="2" min="0" max="150" onchange="this.form.submit()" valueChangeListener="#{csCtrl.defineLevel}"/>  
+	lvl: #{csCtrl.level} <br/>
+</p:fieldset>
+
+<p:fieldset legend="Race" style="margin-bottom:20px">
+	Race: <p:selectOneMenu value="#{csCtrl.cs.race}" onchange="submit()" valueChangeListener="#{csCtrl.loadStats2}">
+		<f:selectItem itemValue="selection" itemLabel="Select a race"/>
 		<f:selectItem itemValue="human" itemLabel="Human"/>
 		<f:selectItem itemValue="trollkin" itemLabel="Trollkin"/>
+	</p:selectOneMenu>
+</p:fieldset>
+<br/>
 
-	</h:selectOneMenu>
-	<h:commandButton actionListener="#{csCtrl.loadStats(csCtrl.cs.race)}" value="Select" />
-	
-
-	<table class="tg">
-  <tr>
-    <th class="tg-9hbo">Primary Stats</th>
-    <th class="tg-9hbo">Secondary Stats</th>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" rowspan="2">
-    	FIS <h:inputText size="2" value="#{csCtrl.stats.basePhy}" />
-    	<!-- Max <h:inputText size="2" value="#{csCtrl.stats.maxPhy[0]}" /> -->
-     </td>
-    <td class="tg-yw4l">FOR <h:inputText size="2" value="#{csCtrl.stats.baseStr}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">VEL <h:inputText size="2" value="#{csCtrl.stats.baseSpd}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" rowspan="2">AGI <h:inputText size="2" value="#{csCtrl.stats.baseAgi}" /></td>
-    <td class="tg-yw4l">MAE <h:inputText size="2" value="#{csCtrl.stats.basePrw}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">DES <h:inputText size="2" value="#{csCtrl.stats.basePoi}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" rowspan="2">INT <h:inputText size="2" value="#{csCtrl.stats.baseIntel}" /></td>
-    <td class="tg-yw4l">ARC <h:inputText size="2" value="#{csCtrl.stats.baseArc}" /></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">PER <h:inputText size="2" value="#{csCtrl.stats.basePer}" /></td>
-  </tr>
-</table>
-	
+<p:fieldset legend="Stats" style="margin-bottom:20px">
+<p:panelGrid >
+<f:facet name="header">
+	<p:row>
+		<p:column colspan="4">Stats</p:column>
+	</p:row>
+	<p:row>
+		<p:column colspan="2">Primary</p:column>
+		<p:column colspan="2">Secondary</p:column>
+	</p:row>
+</f:facet>	
+  <p:row>
+    <p:column  rowspan="2">
+    	PHY 
+     </p:column>
+     <p:column rowspan="2">
+    	<p:spinner size="2" value="#{csCtrl.stats.basePhy}" />  /#{csCtrl.stats.maxPhy[csCtrl.level]}
+     </p:column>
+    <p:column >
+    	STR
+     </p:column>
+     <p:column> 
+    	<p:spinner size="2" value="#{csCtrl.stats.baseStr}" /> /#{csCtrl.stats.maxStr[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column >
+    	SPD 
+     </p:column>
+     <p:column>
+    	<p:spinner size="2" value="#{csCtrl.stats.baseSpd}" /> /#{csCtrl.stats.maxSpd[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column  rowspan="2">
+    	AGI 
+     </p:column>
+     <p:column rowspan="2">
+    	<p:spinner size="2" value="#{csCtrl.stats.baseAgi}" />  /#{csCtrl.stats.maxAgi[csCtrl.level]}
+     </p:column>
+    <p:column >
+    	PRW
+     </p:column>
+     <p:column> 
+    	<p:spinner size="2" value="#{csCtrl.stats.basePrw}" /> /#{csCtrl.stats.maxPrw[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column >
+    	POI 
+     </p:column>
+     <p:column>
+    	<p:spinner size="2" value="#{csCtrl.stats.basePoi}" /> /#{csCtrl.stats.maxPoi[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column  rowspan="2">
+    	INT 
+     </p:column>
+     <p:column rowspan="2">
+    	<p:spinner size="2" value="#{csCtrl.stats.baseIntel}" />  /#{csCtrl.stats.maxIntel[csCtrl.level]}
+     </p:column>
+    <p:column >
+    	ARC
+     </p:column>
+     <p:column> 
+    	<p:spinner size="2" value="#{csCtrl.stats.baseArc}" /> /#{csCtrl.stats.maxArc[csCtrl.level]}
+    </p:column>
+  </p:row>
+  <p:row>
+    <p:column >
+    	PER 
+     </p:column>
+     <p:column>
+    	<p:spinner size="2" value="#{csCtrl.stats.basePer}" /> /#{csCtrl.stats.maxPer[csCtrl.level]}
+    </p:column>
+  </p:row>
+</p:panelGrid>
+</p:fieldset>
 	
 	<h:commandButton actionListener="#{csCtrl.save()}" value="Salvar" />
 </h:form>
 
-</body>
+</h:body>
 </html>

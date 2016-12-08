@@ -37,6 +37,7 @@ public class CharSheetController {
 	
 	@PostConstruct
 	public void init(){
+		cs.setXp(0);
 	}
 	
 	
@@ -67,11 +68,13 @@ public class CharSheetController {
 	}
 	 
 	public void defineLevel(ValueChangeEvent e){
-		String lvl = e.getNewValue().toString();
+		Integer lvl = Integer.parseInt(e.getNewValue().toString());
 		System.out.println("EVENT: lvl:"+lvl);
-		setLevel(Integer.parseInt(lvl));
-		System.out.println(level);
-		this.level=Integer.parseInt(lvl);
+		if (lvl>=100){
+			this.level=2;
+		} else if (lvl>=50){
+			this.level=1;
+		} else this.level=0;
 	}
 	
 
