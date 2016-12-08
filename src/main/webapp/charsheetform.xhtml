@@ -7,44 +7,60 @@
 <head>
 <meta charset="ISO-8859-1"/>
 <title>Criar Ficha</title>
+<script type="text/javascript">  
+  //Script JS  
+</script>  
 </head>
 
 <body>
-<h:form>
+<h:form >
+
 	
-	Name: <h:inputText value="#{csCtrl.cs.name}" />
-	Race: <h:inputText value="#{csCtrl.cs.race}" />
-	xp: <h:inputText value="#{csCtrl.cs.xp}" /> 
+	Name: <h:inputText value="#{csCtrl.cs.name}" /> 
+	xp: <h:inputText value="#{csCtrl.cs.xp}"  onchange="this.form.submit()" valueChangeListener="#{csCtrl.defineLevel}"/>  
+	lvl: <h:inputText value="#{csCtrl.level}" /> <br/>
+	Race: <h:selectOneMenu value="#{csCtrl.cs.race}" onchange="submit()" valueChangeListener="#{csCtrl.loadStats2}">
+		<f:selectItem itemValue="selection" itemLabel="Selecione"/>
+		<f:selectItem itemValue="human" itemLabel="Human"/>
+		<f:selectItem itemValue="trollkin" itemLabel="Trollkin"/>
+
+	</h:selectOneMenu>
+	<h:commandButton actionListener="#{csCtrl.loadStats(csCtrl.cs.race)}" value="Select" />
+	
+
 	<table class="tg">
   <tr>
     <th class="tg-9hbo">Primary Stats</th>
     <th class="tg-9hbo">Secondary Stats</th>
   </tr>
   <tr>
-    <td class="tg-yw4l" rowspan="2">FIS <h:inputText value="#{csCtrl.cs.phy}" /> </td>
-    <td class="tg-yw4l">FOR <h:inputText value="#{csCtrl.cs.str}" /></td>
+    <td class="tg-yw4l" rowspan="2">
+    	FIS <h:inputText size="2" value="#{csCtrl.stats.basePhy}" />
+    	<!-- Max <h:inputText size="2" value="#{csCtrl.stats.maxPhy[0]}" /> -->
+     </td>
+    <td class="tg-yw4l">FOR <h:inputText size="2" value="#{csCtrl.stats.baseStr}" /></td>
   </tr>
   <tr>
-    <td class="tg-yw4l">VEL <h:inputText value="#{csCtrl.cs.spd}" /></td>
+    <td class="tg-yw4l">VEL <h:inputText size="2" value="#{csCtrl.stats.baseSpd}" /></td>
   </tr>
   <tr>
-    <td class="tg-yw4l" rowspan="2">AGI <h:inputText value="#{csCtrl.cs.agi}" /></td>
-    <td class="tg-yw4l">MAE <h:inputText value="#{csCtrl.cs.prw}" /></td>
+    <td class="tg-yw4l" rowspan="2">AGI <h:inputText size="2" value="#{csCtrl.stats.baseAgi}" /></td>
+    <td class="tg-yw4l">MAE <h:inputText size="2" value="#{csCtrl.stats.basePrw}" /></td>
   </tr>
   <tr>
-    <td class="tg-yw4l">DES <h:inputText value="#{csCtrl.cs.poi}" /></td>
+    <td class="tg-yw4l">DES <h:inputText size="2" value="#{csCtrl.stats.basePoi}" /></td>
   </tr>
   <tr>
-    <td class="tg-yw4l" rowspan="2">INT <h:inputText value="#{csCtrl.cs.intel}" /></td>
-    <td class="tg-yw4l">ARC <h:inputText value="#{csCtrl.cs.arc}" /></td>
+    <td class="tg-yw4l" rowspan="2">INT <h:inputText size="2" value="#{csCtrl.stats.baseIntel}" /></td>
+    <td class="tg-yw4l">ARC <h:inputText size="2" value="#{csCtrl.stats.baseArc}" /></td>
   </tr>
   <tr>
-    <td class="tg-yw4l">PER <h:inputText value="#{csCtrl.cs.per}" /></td>
+    <td class="tg-yw4l">PER <h:inputText size="2" value="#{csCtrl.stats.basePer}" /></td>
   </tr>
 </table>
 	
 	
-	<h:commandButton action="#{csCtrl.save()}" value="Salvar" />
+	<h:commandButton actionListener="#{csCtrl.save()}" value="Salvar" />
 </h:form>
 
 </body>

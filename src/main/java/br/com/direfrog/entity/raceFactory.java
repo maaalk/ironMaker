@@ -3,7 +3,7 @@ package br.com.direfrog.entity;
 public class raceFactory {
 	public static Race generateRace(String raceName){
 		Race race = new Race();
-		if (raceName == "human"){
+		if (raceName.equals("human")){
 			race.setBasePhy(5);
 			race.setBaseSpd(6);
 			race.setBaseStr(4);
@@ -26,7 +26,7 @@ public class raceFactory {
 			
 		}
 		
-		if (raceName == "trollkin"){
+		if (raceName.equals("trollkin")){
 			race.setBasePhy(6);
 			race.setBaseSpd(5);
 			race.setBaseStr(5);
