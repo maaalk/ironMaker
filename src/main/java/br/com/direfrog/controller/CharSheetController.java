@@ -39,7 +39,7 @@ public class CharSheetController {
 	@PostConstruct
 	public void init(){
 		level = 0;
-		stats = raceFactory.generateRace("");
+		stats = raceFactory.generateRace("empty");
 	}
 	
 	
@@ -57,14 +57,12 @@ public class CharSheetController {
 	public void loadStats(){
 		System.out.println("EVENT: selected race:"+cs.getRace());
 		this.stats = raceFactory.generateRace(cs.getRace());
-		//System.out.println(stats);
 	}
 	
 	
 	 
 	public void defineLevel(ValueChangeEvent e){
 		Integer lvl = Integer.parseInt(e.getNewValue().toString());
-		System.out.println("EVENT: lvl:"+lvl);
 		if (lvl>=100){
 			this.level=2;
 		} else if (lvl>=50){
@@ -72,7 +70,12 @@ public class CharSheetController {
 		} else this.level=0;
 	}
 	
-
+	public void clear(){
+		cs=new CharSheet();
+		stats = raceFactory.generateRace("empty");
+		level = 0;
+		
+	}
 
 	public CharSheet getCs() {
 		return cs;

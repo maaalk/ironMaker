@@ -236,7 +236,6 @@ public class Race {
 
 
 	public Integer getBaseAgi() {
-		System.out.println("AGI="+baseAgi);
 		return baseAgi;
 	}
 
