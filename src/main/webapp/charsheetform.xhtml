@@ -14,24 +14,26 @@
 </h:head>
 
 <h:body>
-<h:form >
+<h:form>
 
 <p:fieldset legend="Basic" style="margin-bottom:20px">
 	Name: <h:inputText value="#{csCtrl.cs.name}" /> 
-	xp: <p:spinner value="#{csCtrl.cs.xp}" size="2" min="0" max="150" onchange="this.form.submit()" valueChangeListener="#{csCtrl.defineLevel}"/>  
+	xp: <p:spinner  value="#{csCtrl.cs.xp}" size="2" min="0" max="150" onchange="this.form.submit()" valueChangeListener="#{csCtrl.defineLevel}"/>  
 	lvl: #{csCtrl.level} <br/>
 </p:fieldset>
 
 <p:fieldset legend="Race" style="margin-bottom:20px">
-	Race: <p:selectOneMenu value="#{csCtrl.cs.race}" onchange="submit()" valueChangeListener="#{csCtrl.loadStats2}">
-		<f:selectItem itemValue="selection" itemLabel="Select a race"/>
+	Race: <p:selectOneMenu value="#{csCtrl.cs.race}" >
+		<f:selectItem itemValue="empty" itemLabel="Select a race"/>
 		<f:selectItem itemValue="human" itemLabel="Human"/>
 		<f:selectItem itemValue="trollkin" itemLabel="Trollkin"/>
+		<f:ajax listener="#{csCtrl.loadStats}" render="csform"/>
 	</p:selectOneMenu>
+	
 </p:fieldset>
 <br/>
 
-<p:fieldset legend="Stats" style="margin-bottom:20px">
+<p:fieldset legend="Stats" style="margin-bottom:20px" id="csform">
 <p:panelGrid >
 <f:facet name="header">
 	<p:row>
@@ -47,13 +49,13 @@
     	PHY 
      </p:column>
      <p:column rowspan="2">
-    	<p:spinner size="2" value="#{csCtrl.stats.basePhy}" />  /#{csCtrl.stats.maxPhy[csCtrl.level]}
+    	<p:spinner size="2" disabled="true" value="#{csCtrl.stats.basePhy}" />  /#{csCtrl.stats.maxPhy[csCtrl.level]}
      </p:column>
     <p:column >
     	STR
      </p:column>
      <p:column> 
-    	<p:spinner size="2" value="#{csCtrl.stats.baseStr}" /> /#{csCtrl.stats.maxStr[csCtrl.level]}
+    	<p:spinner  size="2" value="#{csCtrl.stats.baseStr}" /> /#{csCtrl.stats.maxStr[csCtrl.level]}
     </p:column>
   </p:row>
   <p:row>
@@ -112,6 +114,7 @@
 </p:fieldset>
 	
 	<h:commandButton actionListener="#{csCtrl.save()}" value="Salvar" />
+	
 </h:form>
 
 </h:body>
