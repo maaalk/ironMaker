@@ -23,11 +23,11 @@ public class ArchetypeBenefitDAO extends GenericDAO<ArchetypeBenefit> {
 		return resultSet;
 	}
 	
-	public Set<ArchetypeBenefit> findByType(String type){
+	public Set<ArchetypeBenefit> findByArchetypeId(Integer id){
 		String className = param.getSimpleName();
 		
-		Query q = em.createQuery("select obj from "+className+" obj where obj.type:=typeParam");
-		q.setParameter("typeParam", type);
+		Query q = em.createQuery("select obj from "+className+" obj where obj.archetype.id=:idParam");
+		q.setParameter("idParam", id);
 		List <ArchetypeBenefit> resultList = q.getResultList();
 		
 		Set<ArchetypeBenefit> resultSet = new HashSet<ArchetypeBenefit>();

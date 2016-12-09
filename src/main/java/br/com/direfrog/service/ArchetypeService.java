@@ -18,4 +18,12 @@ public class ArchetypeService {
 		return dao.findAll();
 	}
 
+	public Archetype findById(int id) {
+		return dao.findById(id);
+	}
+
+	public Archetype findByName(String name){
+		return dao.findByName(name);
+	}
+	
 }

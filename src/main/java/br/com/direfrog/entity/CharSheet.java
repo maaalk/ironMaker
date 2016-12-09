@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.OneToOne;
+
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -43,8 +45,12 @@ public class CharSheet implements Serializable {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "charsheet_archetypebenefit", joinColumns = @JoinColumn(name = "charsheet_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name="archetypebenefit_id", referencedColumnName="id"))
-	private Set<ArchetypeBenefit> benefitList;
+	private Set<ArchetypeBenefit> benefitList = new HashSet<ArchetypeBenefit>();
 
+	public void addArchetypeBenefit(ArchetypeBenefit benefit){
+		benefitList.add(benefit);
+	}
+	
 	/*//primary and secondary attibutes
 		private Integer phy;
 		private Integer spd;

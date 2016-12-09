@@ -16,7 +16,7 @@ import org.junit.Assert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="file:src/main/webapp/WEB-INF/springbeans.xml")
-@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=false)
+@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
 public class TestArchetypeBenefit {
 	
 	@Autowired
@@ -43,6 +43,12 @@ public class TestArchetypeBenefit {
 		
 		Set<ArchetypeBenefit> lista = dao.findAllBySet();
 		
+		Assert.assertTrue(lista.size()>0);
+	}
+	
+	@Test
+	public void testFindByArchetypeId(){
+		Set<ArchetypeBenefit> lista = dao.findByArchetypeId(1);
 		Assert.assertTrue(lista.size()>0);
 	}
 
