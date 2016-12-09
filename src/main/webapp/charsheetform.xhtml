@@ -12,112 +12,48 @@
 
 </h:head>
 
+<body>
 
-<h:body>
-<h:form>
+	<h:form>
+		<p:fieldset legend="Archetype" style="margin-bottom:20px">
+			<h:selectOneMenu value="#{archetypeBenefitController.archetype}"
+				converter="#{archetypeConverter}">
+				<f:selectItem itemValue="" itemLabel="Select"
+					noSelectionOption="true" />
+				<f:selectItems value="#{archetypeController.archetypeList}"
+					var="archetype" itemLabel="#{archetype.name}" />
 
-<p:fieldset legend="Basic" style="margin-bottom:20px">
-	Name: <h:inputText value="#{csCtrl.cs.name}" /> 
-	xp: <p:spinner  value="#{csCtrl.cs.xp}" size="2" min="0" max="150" onchange="this.form.submit()" valueChangeListener="#{csCtrl.defineLevel}"/>  
-	lvl: #{csCtrl.level} <br/>
-</p:fieldset>
+				<f:ajax event="change" render="@form"
+					listener="#{archetypeBenefitController.loadBenefitList}" />
+			</h:selectOneMenu>
 
-<p:fieldset legend="Race" style="margin-bottom:20px">
-	Race: <p:selectOneMenu value="#{csCtrl.cs.race}" >
-		<f:selectItem itemValue="empty" itemLabel="Select a race"/>
-		<f:selectItem itemValue="human" itemLabel="Human"/>
-		<f:selectItem itemValue="trollkin" itemLabel="Trollkin"/>
-		<f:ajax listener="#{csCtrl.loadStats}" render="csform"/>
-	</p:selectOneMenu>
-	
-</p:fieldset>
-<br/>
+			<h:dataTable id="archetype_benefit_table" border="1"
+				value="#{archetypeBenefitController.benefitList}" var="benefit">
 
-<p:fieldset legend="Stats" style="margin-bottom:20px" id="csform">
-<p:panelGrid >
-<f:facet name="header">
-	<p:row>
-		<p:column colspan="4">Stats</p:column>
-	</p:row>
-	<p:row>
-		<p:column colspan="2">Primary</p:column>
-		<p:column colspan="2">Secondary</p:column>
-	</p:row>
-</f:facet>	
-  <p:row>
-    <p:column  rowspan="2">
-    	PHY 
-     </p:column>
-     <p:column rowspan="2">
-    	<p:spinner size="2" value="#{csCtrl.stats.basePhy}" />  /#{csCtrl.stats.maxPhy[csCtrl.level]}
-     </p:column>
-    <p:column >
-    	STR
-     </p:column>
-     <p:column> 
-    	<p:spinner  size="2" value="#{csCtrl.stats.baseStr}" /> /#{csCtrl.stats.maxStr[csCtrl.level]}
-    </p:column>
-  </p:row>
-  <p:row>
-    <p:column >
-    	SPD 
-     </p:column>
-     <p:column>
-    	<p:spinner size="2" value="#{csCtrl.stats.baseSpd}" /> /#{csCtrl.stats.maxSpd[csCtrl.level]}
-    </p:column>
-  </p:row>
-  <p:row>
-    <p:column  rowspan="2">
-    	AGI 
-     </p:column>
-     <p:column rowspan="2">
-    	<p:spinner size="2" value="#{csCtrl.stats.baseAgi}" />  /#{csCtrl.stats.maxAgi[csCtrl.level]}
-     </p:column>
-    <p:column >
-    	PRW
-     </p:column>
-     <p:column> 
-    	<p:spinner size="2" value="#{csCtrl.stats.basePrw}" /> /#{csCtrl.stats.maxPrw[csCtrl.level]}
-    </p:column>
-  </p:row>
-  <p:row>
-    <p:column >
-    	POI 
-     </p:column>
-     <p:column>
-    	<p:spinner size="2" value="#{csCtrl.stats.basePoi}" /> /#{csCtrl.stats.maxPoi[csCtrl.level]}
-    </p:column>
-  </p:row>
-  <p:row>
-    <p:column  rowspan="2">
-    	INT 
-     </p:column>
-     <p:column rowspan="2">
-    	<p:spinner size="2" value="#{csCtrl.stats.baseIntel}" />  /#{csCtrl.stats.maxIntel[csCtrl.level]}
-     </p:column>
-    <p:column >
-    	ARC
-     </p:column>
-     <p:column> 
-    	<p:spinner size="2" value="#{csCtrl.stats.baseArc}" /> /#{csCtrl.stats.maxArc[csCtrl.level]}
-    </p:column>
-  </p:row>
-  <p:row>
-    <p:column >
-    	PER 
-     </p:column>
-     <p:column>
-    	<p:spinner size="2" value="#{csCtrl.stats.basePer}" /> /#{csCtrl.stats.maxPer[csCtrl.level]}
-    </p:column>
-  </p:row>
-</p:panelGrid>
-</p:fieldset>
-	
-	<h:commandButton actionListener="#{csCtrl.save()}" value="Salvar" />
-	<h:commandButton actionListener="#{csCtrl.clear()}" value="Clear" />
-	
-</h:form>
+				<f:facet name="header">List</f:facet>
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+				#{benefit.name}
+			</h:column>
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+				#{benefit.archetype.name}
+			</h:column>
 
-</h:body>
+			<h:column>
+					<f:facet name="header">ID</f:facet>
+				<h:commandButton actionListener="#{csCtrl.saveBenefit(benefit)}" value="Salvar"/> 
+			</h:column>
+			
+			</h:dataTable>
 
+			
+
+		</p:fieldset>
+
+
+
+	</h:form>
+
+</body>
 </html>
