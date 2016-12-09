@@ -1,6 +1,7 @@
 package br.com.direfrog.controller;
 
 import javax.annotation.PostConstruct;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CharSheetController {
 	@Autowired
 	private RaceService raceService;
 		
-	private Race stats= new Race();
+	private Race stats;
 	
 	private CharSheet cs = new CharSheet();
 	
@@ -37,7 +38,8 @@ public class CharSheetController {
 	
 	@PostConstruct
 	public void init(){
-		cs.setXp(0);
+		level = 0;
+		stats = raceFactory.generateRace("empty");
 	}
 	
 	
@@ -52,24 +54,15 @@ public class CharSheetController {
 		
 	}
 	
-	
-	public void loadStats(String race){
-		System.out.println("selected race:"+race);
-		this.stats = raceFactory.generateRace(race);
-		System.out.println(stats);
+	public void loadStats(){
+		System.out.println("EVENT: selected race:"+cs.getRace());
+		this.stats = raceFactory.generateRace(cs.getRace());
 	}
 	
-	public void loadStats2(ValueChangeEvent e){
-		String race = e.getNewValue().toString();
-		System.out.println("EVENT: selected race:"+race);
-		this.stats = raceFactory.generateRace(race);
-		System.out.println(stats);
-		getStats();
-	}
+	
 	 
 	public void defineLevel(ValueChangeEvent e){
 		Integer lvl = Integer.parseInt(e.getNewValue().toString());
-		System.out.println("EVENT: lvl:"+lvl);
 		if (lvl>=100){
 			this.level=2;
 		} else if (lvl>=50){
@@ -77,7 +70,12 @@ public class CharSheetController {
 		} else this.level=0;
 	}
 	
-
+	public void clear(){
+		cs=new CharSheet();
+		stats = raceFactory.generateRace("empty");
+		level = 0;
+		
+	}
 
 	public CharSheet getCs() {
 		return cs;
