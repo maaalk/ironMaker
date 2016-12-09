@@ -51,5 +51,20 @@ public class TestArchetypeBenefit {
 		Set<ArchetypeBenefit> lista = dao.findByArchetypeId(1);
 		Assert.assertTrue(lista.size()>0);
 	}
+	
+	@Test
+	public void testFindByName(){
+		String name = "testando";
+		ArchetypeBenefit benefit = new ArchetypeBenefit();
+		benefit.setDescription("lalal");
+		benefit.setName(name);
+		
+		ArchetypeBenefit benefitSaved = dao.save(benefit);
+		
+		ArchetypeBenefit result = dao.findByName(name);
+		Assert.assertEquals(benefitSaved.getName(), result.getName());
+		Assert.assertEquals(benefitSaved.getDescription(), result.getDescription());
+		Assert.assertEquals(benefitSaved.getId(), result.getId());
+	}
 
 }

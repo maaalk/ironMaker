@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
+import org.primefaces.model.DualListModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -26,14 +27,26 @@ public class ArchetypeBenefitController {
 	private Archetype archetype;
 	//private String result;
 	
+	//TESTS
+	private DualListModel<ArchetypeBenefit> beneList;
+	//TESTES
 	
 	@PostConstruct
 	public void init(){
 		
 		
-		
-		
-		//Set<ArchetypeBenefit> benefitSet = new HashSet<ArchetypeBenefit>();
+		//TESTES
+		List<ArchetypeBenefit> benefitSource = new ArrayList<ArchetypeBenefit>();
+        List<ArchetypeBenefit> benefitTarget = new ArrayList<ArchetypeBenefit>();
+         
+        benefitSource.add(service.findById(1));
+        benefitSource.add(service.findById(2));
+  
+        
+        beneList = new DualListModel<ArchetypeBenefit>(benefitSource, benefitTarget);
+		//TESTES
+        
+        //Set<ArchetypeBenefit> benefitSet = new HashSet<ArchetypeBenefit>();
 		//benefitSet=service.findAll();
 		
 		//benefitList = new ArrayList<ArchetypeBenefit>();
@@ -81,7 +94,13 @@ public class ArchetypeBenefitController {
 		this.archetype = archetype;
 	}
 
+	public DualListModel<ArchetypeBenefit> getBeneList() {
+		return beneList;
+	}
 
-	
+	public void setBeneList(DualListModel<ArchetypeBenefit> beneList) {
+		this.beneList = beneList;
+	}
+
 	
 }
