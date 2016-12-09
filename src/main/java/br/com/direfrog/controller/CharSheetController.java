@@ -9,16 +9,16 @@ import javax.faces.event.ValueChangeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import br.com.direfrog.entity.Archetype;
 import br.com.direfrog.entity.ArchetypeBenefit;
 import br.com.direfrog.entity.CharSheet;
 import br.com.direfrog.entity.Race;
+import br.com.direfrog.entity.Stats;
 import br.com.direfrog.entity.raceFactory;
 import br.com.direfrog.exception.ControllerException;
 import br.com.direfrog.exception.ServiceException;
 import br.com.direfrog.service.ArchetypeService;
 import br.com.direfrog.service.CharSheetService;
-import br.com.direfrog.service.RaceService;
+import br.com.direfrog.service.StatsService;
 
 @Controller(value = "csCtrl")
 public class CharSheetController {
@@ -26,17 +26,15 @@ public class CharSheetController {
 	@Autowired
 	private CharSheetService csService;
 	
-	@Autowired
-	private ArchetypeService archetypeService;
+	private Stats stats = new Stats();
 
-	@Autowired
-	private RaceService raceService;
-
-	private Race stats = new Race();
-
+	Set<ArchetypeBenefit> benefitList = new HashSet<ArchetypeBenefit>();
+	
 	private CharSheet cs = new CharSheet();
 
 	private Integer level;
+	
+	private Race race;
 	
 	
 	public CharSheetController() {
@@ -46,7 +44,7 @@ public class CharSheetController {
 	@PostConstruct
 	public void init() {
 		level = 0;
-		stats = raceFactory.generateRace("empty");
+		race = raceFactory.generateRace("empty");
 	}
 
 
@@ -76,9 +74,11 @@ public class CharSheetController {
 	}
 
 	
-	public void loadStats() {
+	public void loadRace() {
 		System.out.println("EVENT: selected race:" + cs.getRace());
-		this.stats = raceFactory.generateRace(cs.getRace());
+		this.race = raceFactory.generateRace(cs.getRace());
+		this.stats=race.getStats();
+		this.benefitList=race.getBenefitList();
 	}
 
 	
@@ -95,25 +95,33 @@ public class CharSheetController {
 
 	public void clear(){
 		cs=new CharSheet();
-		stats = raceFactory.generateRace("empty");
+		race = raceFactory.generateRace("empty");
 		level = 0;
 		
 	}
-	
+
+	public Stats getStats() {
+		return stats;
+	}
+
+	public void setStats(Stats stats) {
+		this.stats = stats;
+	}
+
+	public Set<ArchetypeBenefit> getBenefitList() {
+		return benefitList;
+	}
+
+	public void setBenefitList(Set<ArchetypeBenefit> benefitList) {
+		this.benefitList = benefitList;
+	}
+
 	public CharSheet getCs() {
 		return cs;
 	}
 
 	public void setCs(CharSheet cs) {
 		this.cs = cs;
-	}
-
-	public Race getStats() {
-		return stats;
-	}
-
-	public void setStats(Race stats) {
-		this.stats = stats;
 	}
 
 	public Integer getLevel() {
@@ -123,6 +131,16 @@ public class CharSheetController {
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
+
+	public Race getRace() {
+		return race;
+	}
+
+	public void setRace(Race race) {
+		this.race = race;
+	}
+	
+	
 
 
 }

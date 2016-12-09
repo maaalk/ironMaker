@@ -34,4 +34,12 @@ public class ArchetypeBenefitDAO extends GenericDAO<ArchetypeBenefit> {
 		resultSet.addAll(resultList);
 		return resultSet;
 	}
+	
+	public ArchetypeBenefit findByName(String name) {
+		String className = param.getSimpleName();
+
+		Query q = em.createQuery("select obj from " + className + " obj where obj.name=:nameParam");
+		q.setParameter("nameParam", name);
+		return (ArchetypeBenefit) q.getSingleResult();
+	}
 }

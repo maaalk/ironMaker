@@ -1,51 +1,73 @@
 package br.com.direfrog.entity;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import br.com.direfrog.dao.ArchetypeBenefitDAO;
+
+@Component
 public class raceFactory {
+	
+	private static ArchetypeBenefitDAO dao;
+	
+	@Autowired
+	private ArchetypeBenefitDAO dao0;
+	
+	 @PostConstruct     
+	  public void initStaticDao () {
+	     dao = this.dao0;
+	 }
+	
 	public static Race generateRace(String raceName){
-		Race race = new Race();
+	
+		Race race = new Race(raceName);
+		
 		if (raceName.equals("human")){
-			race.setBasePhy(5);
-			race.setBaseSpd(6);
-			race.setBaseStr(4);
-			race.setBaseAgi(3);
-			race.setBasePrw(4);
-			race.setBasePoi(4);
-			race.setBaseIntel(3);
-			race.setBaseArc(0);
-			race.setBasePer(3);
+			race.getStats().setBasePhy(5);
+			race.getStats().setBaseSpd(6);
+			race.getStats().setBaseStr(4);
+			race.getStats().setBaseAgi(3);
+			race.getStats().setBasePrw(4);
+			race.getStats().setBasePoi(4);
+			race.getStats().setBaseIntel(3);
+			race.getStats().setBaseArc(0);
+			race.getStats().setBasePer(3);
 			
-			race.setMaxPhy((new Integer[]{7,8,8}));
-			race.setMaxSpd((new Integer[]{7,7,7}));
-			race.setMaxStr((new Integer[]{6,7,8}));
-			race.setMaxAgi((new Integer[]{5,6,7}));
-			race.setMaxPrw((new Integer[]{5,6,7}));
-			race.setMaxPoi((new Integer[]{5,6,7}));
-			race.setMaxIntel((new Integer[]{5,6,7}));
-			race.setMaxArc((new Integer[]{4,6,8}));
-			race.setMaxPer((new Integer[]{5,6,7}));
-			
+			race.getStats().setMaxPhy((new Integer[]{7,8,8}));
+			race.getStats().setMaxSpd((new Integer[]{7,7,7}));
+			race.getStats().setMaxStr((new Integer[]{6,7,8}));
+			race.getStats().setMaxAgi((new Integer[]{5,6,7}));
+			race.getStats().setMaxPrw((new Integer[]{5,6,7}));
+			race.getStats().setMaxPoi((new Integer[]{5,6,7}));
+			race.getStats().setMaxIntel((new Integer[]{5,6,7}));
+			race.getStats().setMaxArc((new Integer[]{4,6,8}));
+			race.getStats().setMaxPer((new Integer[]{5,6,7}));			
 		}
 		
 		if (raceName.equals("trollkin")){
-			race.setBasePhy(6);
-			race.setBaseSpd(5);
-			race.setBaseStr(5);
-			race.setBaseAgi(3);
-			race.setBasePrw(4);
-			race.setBasePoi(2);
-			race.setBaseIntel(3);
-			race.setBaseArc(0);
-			race.setBasePer(3);
+			race.getStats().setBasePhy(6);
+			race.getStats().setBaseSpd(5);
+			race.getStats().setBaseStr(5);
+			race.getStats().setBaseAgi(3);
+			race.getStats().setBasePrw(4);
+			race.getStats().setBasePoi(2);
+			race.getStats().setBaseIntel(3);
+			race.getStats().setBaseArc(0);
+			race.getStats().setBasePer(3);
 			
-			race.setMaxPhy((new Integer[]{8,9,10}));
-			race.setMaxSpd((new Integer[]{6,6,6}));
-			race.setMaxStr((new Integer[]{7,8,9}));
-			race.setMaxAgi((new Integer[]{5,6,7}));
-			race.setMaxPrw((new Integer[]{5,6,7}));
-			race.setMaxPoi((new Integer[]{5,6,7}));
-			race.setMaxIntel((new Integer[]{4,5,6}));
-			race.setMaxArc((new Integer[]{4,6,7}));
-			race.setMaxPer((new Integer[]{4,5,6}));
+			race.getStats().setMaxPhy((new Integer[]{8,9,10}));
+			race.getStats().setMaxSpd((new Integer[]{6,6,6}));
+			race.getStats().setMaxStr((new Integer[]{7,8,9}));
+			race.getStats().setMaxAgi((new Integer[]{5,6,7}));
+			race.getStats().setMaxPrw((new Integer[]{5,6,7}));
+			race.getStats().setMaxPoi((new Integer[]{5,6,7}));
+			race.getStats().setMaxIntel((new Integer[]{4,5,6}));
+			race.getStats().setMaxArc((new Integer[]{4,6,7}));
+			race.getStats().setMaxPer((new Integer[]{4,5,6}));
+			
+			race.getBenefitList().add(dao.findByName("Vendetta"));
 			
 		}
 		
