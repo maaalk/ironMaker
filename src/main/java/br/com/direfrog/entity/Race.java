@@ -17,8 +17,7 @@ public class Race {
 	private Integer id;
 	
 	//description
-	private String name;
-	private String description;
+	
 	
 	@OneToOne(mappedBy="stats")
 	private CharSheet charSheet;
@@ -54,7 +53,7 @@ public class Race {
 
 	@Override
 	public String toString() {
-		return "Race [name=" + name + ", description=" + description + ", basePhy=" + basePhy + ", baseSpd="
+		return "Race [basePhy=" + basePhy + ", baseSpd="
 				+ baseSpd + ", baseStr=" + baseStr + ", baseAgi=" + baseAgi + ", basePrw=" + basePrw + ", basePoi="
 				+ basePoi + ", baseIntel=" + baseIntel + ", baseArc=" + baseArc + ", basePer=" + basePer + ", maxPhy="
 				+ Arrays.toString(maxPhy) + ", maxSpd=" + Arrays.toString(maxSpd) + ", maxStr="
@@ -79,7 +78,7 @@ public class Race {
 		result = prime * result + ((baseSpd == null) ? 0 : baseSpd.hashCode());
 		result = prime * result + ((baseStr == null) ? 0 : baseStr.hashCode());
 		result = prime * result + ((charSheet == null) ? 0 : charSheet.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
+
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + Arrays.hashCode(maxAgi);
 		result = prime * result + Arrays.hashCode(maxArc);
@@ -90,7 +89,7 @@ public class Race {
 		result = prime * result + Arrays.hashCode(maxPrw);
 		result = prime * result + Arrays.hashCode(maxSpd);
 		result = prime * result + Arrays.hashCode(maxStr);
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+	
 		return result;
 	}
 
@@ -154,11 +153,7 @@ public class Race {
 				return false;
 		} else if (!charSheet.equals(other.charSheet))
 			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
+		
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -182,11 +177,7 @@ public class Race {
 			return false;
 		if (!Arrays.equals(maxStr, other.maxStr))
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
+		
 		return true;
 	}
 
@@ -201,24 +192,7 @@ public class Race {
 	}
 
 
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 
 
 	public CharSheet getCharSheet() {

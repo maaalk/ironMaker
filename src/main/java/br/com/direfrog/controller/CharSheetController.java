@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class CharSheetController {
 	private RaceService raceService;
 
 	private Race stats = new Race();
-
+	
 	private CharSheet cs = new CharSheet();
 
 	private Integer level;
@@ -47,8 +48,10 @@ public class CharSheetController {
 	}
 
 	@PostConstruct
-	public void init() {
-		cs.setXp(0);
+	public void init(){
+		level = 0;
+		stats = raceFactory.generateRace("empty");
+
 	}
 
 	public void save() throws ControllerException {
@@ -75,15 +78,14 @@ public class CharSheetController {
 		} catch (ServiceException e) {
 			throw new ControllerException("Não salvou", e);
 		}
-
 	}
 
-	
-	public void loadStats() {
-		System.out.println("EVENT: selected race:" + cs.getRace());
+	public void loadStats(){
+		System.out.println("EVENT: selected race:"+cs.getRace());
 		this.stats = raceFactory.generateRace(cs.getRace());
-		// System.out.println(stats);
+
 	}
+
 
 	public void loadStats2(ValueChangeEvent e) {
 		String race = e.getNewValue().toString();
@@ -92,16 +94,22 @@ public class CharSheetController {
 		System.out.println(stats);
 		getStats();
 	}
-
-	public void defineLevel(ValueChangeEvent e) {
+	
+	 
+	public void defineLevel(ValueChangeEvent e){
 		Integer lvl = Integer.parseInt(e.getNewValue().toString());
-		System.out.println("EVENT: lvl:" + lvl);
-		if (lvl >= 100) {
-			this.level = 2;
-		} else if (lvl >= 50) {
-			this.level = 1;
-		} else
-			this.level = 0;
+		if (lvl>=100){
+			this.level=2;
+		} else if (lvl>=50){
+			this.level=1;
+		} else this.level=0;
+	}
+	
+	public void clear(){
+		cs=new CharSheet();
+		stats = raceFactory.generateRace("empty");
+		level = 0;
+		
 	}
 
 	public CharSheet getCs() {
