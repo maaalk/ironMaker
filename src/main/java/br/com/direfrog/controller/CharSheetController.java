@@ -38,10 +38,7 @@ public class CharSheetController {
 
 	private Integer level;
 	
-	//Added by God666
-	/*private Archetype archetype = new Archetype();
-	private Set<ArchetypeBenefit> benefitList = new HashSet<ArchetypeBenefit>();*/
-
+	
 	public CharSheetController() {
 
 	}
@@ -82,17 +79,9 @@ public class CharSheetController {
 	public void loadStats() {
 		System.out.println("EVENT: selected race:" + cs.getRace());
 		this.stats = raceFactory.generateRace(cs.getRace());
-		// System.out.println(stats);
 	}
 
-	public void loadStats2(ValueChangeEvent e) {
-		String race = e.getNewValue().toString();
-		System.out.println("EVENT: selected race:" + race);
-		this.stats = raceFactory.generateRace(race);
-		System.out.println(stats);
-		getStats();
-	}
-
+	
 	public void defineLevel(ValueChangeEvent e) {
 		Integer lvl = Integer.parseInt(e.getNewValue().toString());
 		System.out.println("EVENT: lvl:" + lvl);
