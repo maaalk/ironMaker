@@ -45,20 +45,20 @@ public class CharSheetController {
 
 	@PostConstruct
 	public void init() {
-		cs.setXp(0);
+		level = 0;
+		stats = raceFactory.generateRace("empty");
 	}
 
-	public void save() throws ControllerException {
-		try {
+
+	public void save() throws ControllerException{
+		try{
 			cs.setStats(stats);
 			csService.save(cs);
-			
-		} catch (ServiceException e) {
-			throw new ControllerException("Não salvou", e);
+		}catch (ServiceException e){
+			throw new ControllerException("Não salvou",e);
 		}
-
+		
 	}
-
 	
 	public void saveBenefit(ArchetypeBenefit archeBenefit) throws ControllerException {
 		try {
@@ -93,6 +93,13 @@ public class CharSheetController {
 			this.level = 0;
 	}
 
+	public void clear(){
+		cs=new CharSheet();
+		stats = raceFactory.generateRace("empty");
+		level = 0;
+		
+	}
+	
 	public CharSheet getCs() {
 		return cs;
 	}

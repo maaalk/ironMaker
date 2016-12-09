@@ -51,28 +51,6 @@ public class CharSheet implements Serializable {
 		benefitList.add(benefit);
 	}
 	
-	/*//primary and secondary attibutes
-		private Integer phy;
-		private Integer spd;
-		private Integer str;
-		private Integer agi;
-		private Integer prw;
-		private Integer poi;
-		private Integer intel;
-		private Integer arc;
-		private Integer per;
-		
-		
-		private Integer[] maxPhy;
-		private Integer[] maxSpd;
-		private Integer[] maxStr;
-		private Integer[] maxAgi;
-		private Integer[] maxPrw;
-		private Integer[] maxPoi;
-		private Integer[] maxIntel;
-		private Integer[] maxArc;
-		private Integer[] maxPer;*/
-	
 	public Integer getId() {
 		return id;
 	}
