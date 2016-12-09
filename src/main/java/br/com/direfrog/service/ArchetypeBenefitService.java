@@ -19,8 +19,8 @@ public class ArchetypeBenefitService {
 		dao.save(benefit);
 	}
 
-	public void loadArchBenefitList(Archetype archetype) {
-				
+	public Set<ArchetypeBenefit> findByArchetype(Archetype archetype) {
+		return dao.findByArchetypeId(archetype.getId());
 	}
 
 	public Set<ArchetypeBenefit> findAll() {
@@ -29,10 +29,6 @@ public class ArchetypeBenefitService {
 
 	public ArchetypeBenefit findById(int id) {
 		return dao.findById(id);
-	}
-	
-	public Set<ArchetypeBenefit> findByType(String type) {
-		return dao.findByType(type);
 	}
 	
 }

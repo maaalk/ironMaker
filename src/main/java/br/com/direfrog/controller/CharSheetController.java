@@ -1,80 +1,107 @@
 package br.com.direfrog.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.PostConstruct;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-
+import br.com.direfrog.entity.Archetype;
+import br.com.direfrog.entity.ArchetypeBenefit;
 import br.com.direfrog.entity.CharSheet;
 import br.com.direfrog.entity.Race;
 import br.com.direfrog.entity.raceFactory;
 import br.com.direfrog.exception.ControllerException;
 import br.com.direfrog.exception.ServiceException;
+import br.com.direfrog.service.ArchetypeService;
 import br.com.direfrog.service.CharSheetService;
 import br.com.direfrog.service.RaceService;
 
-
-@Controller(value="csCtrl")
+@Controller(value = "csCtrl")
 public class CharSheetController {
-	
+
 	@Autowired
 	private CharSheetService csService;
 	
 	@Autowired
+	private ArchetypeService archetypeService;
+
+	@Autowired
 	private RaceService raceService;
-		
-	private Race stats;
-	
+
+	private Race stats = new Race();
+
 	private CharSheet cs = new CharSheet();
-	
+
 	private Integer level;
 	
-	public CharSheetController(){
-		
+	//Added by God666
+	/*private Archetype archetype = new Archetype();
+	private Set<ArchetypeBenefit> benefitList = new HashSet<ArchetypeBenefit>();*/
+
+	public CharSheetController() {
+
 	}
-	
+
 	@PostConstruct
-	public void init(){
-		level = 0;
-		stats = raceFactory.generateRace("empty");
+	public void init() {
+		cs.setXp(0);
 	}
-	
-	
-	
-	public void save() throws ControllerException{
-		try{
+
+	public void save() throws ControllerException {
+		try {
 			cs.setStats(stats);
 			csService.save(cs);
-		}catch (ServiceException e){
-			throw new ControllerException("Não salvou",e);
+			
+		} catch (ServiceException e) {
+			throw new ControllerException("Não salvou", e);
 		}
-		
+
 	}
+
 	
-	public void loadStats(){
-		System.out.println("EVENT: selected race:"+cs.getRace());
+	public void saveBenefit(ArchetypeBenefit archeBenefit) throws ControllerException {
+		try {
+			Set<ArchetypeBenefit> list = new HashSet<ArchetypeBenefit>();
+			list.add(archeBenefit);
+			cs.addArchetypeBenefit(archeBenefit);
+			//cs.setBenefitList(list);
+			cs.setArchetype(archeBenefit.getArchetype());
+			csService.save(cs);
+			
+		} catch (ServiceException e) {
+			throw new ControllerException("Não salvou", e);
+		}
+
+	}
+
+	
+	public void loadStats() {
+		System.out.println("EVENT: selected race:" + cs.getRace());
 		this.stats = raceFactory.generateRace(cs.getRace());
+		// System.out.println(stats);
 	}
-	
-	
-	 
-	public void defineLevel(ValueChangeEvent e){
+
+	public void loadStats2(ValueChangeEvent e) {
+		String race = e.getNewValue().toString();
+		System.out.println("EVENT: selected race:" + race);
+		this.stats = raceFactory.generateRace(race);
+		System.out.println(stats);
+		getStats();
+	}
+
+	public void defineLevel(ValueChangeEvent e) {
 		Integer lvl = Integer.parseInt(e.getNewValue().toString());
-		if (lvl>=100){
-			this.level=2;
-		} else if (lvl>=50){
-			this.level=1;
-		} else this.level=0;
-	}
-	
-	public void clear(){
-		cs=new CharSheet();
-		stats = raceFactory.generateRace("empty");
-		level = 0;
-		
+		System.out.println("EVENT: lvl:" + lvl);
+		if (lvl >= 100) {
+			this.level = 2;
+		} else if (lvl >= 50) {
+			this.level = 1;
+		} else
+			this.level = 0;
 	}
 
 	public CharSheet getCs() {
@@ -100,8 +127,6 @@ public class CharSheetController {
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
-	
-	
-	
+
 
 }
