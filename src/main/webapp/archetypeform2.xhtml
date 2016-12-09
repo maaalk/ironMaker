@@ -16,13 +16,32 @@
 
 	<h:form>
 
+		<p:fieldset legend="Archetype" style="margin-bottom:20px">
+			<h:selectOneMenu value="#{archetypeBenefitController.archetype}"
+				converter="#{archetypeConverter}">
+				<f:selectItem itemValue="" itemLabel="Select"
+					noSelectionOption="true" />
+				<f:selectItems value="#{archetypeController.archetypeList}"
+					var="archetype" itemLabel="#{archetype.name}" />
+
+				<f:ajax event="change" render="@form"
+					listener="#{archetypeBenefitController.loadBenefitList}" />
+			</h:selectOneMenu>
 
 
-		<p:growl id="msg" showDetail="true" escape="false" />
+			<p:growl id="msg" showDetail="true" escape="false" />
 
-		<h3 style="margin-top: 0">Basic PickList</h3>
-		<p:pickList id="pickList" value="#{archetypeBenefitController.benefitDualList}" var="benefit"
-			itemLabel="#{benefit.name}" itemValue="#{benefit}" />
+			<h3 style="margin-top: 0">Basic PickList</h3>
+			<p:pickList id="pickList"
+				value="#{archetypeBenefitController.benefitDualList}" var="benefit"
+				itemLabel="#{benefit.name}" itemValue="#{benefit}" />
+
+
+		</p:fieldset>
+
+
+
+
 
 
 	</h:form>

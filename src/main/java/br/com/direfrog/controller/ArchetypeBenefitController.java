@@ -28,18 +28,22 @@ public class ArchetypeBenefitController {
 	//private String result;
 	
 	//TESTES
+	List<ArchetypeBenefit> benefitSource = new ArrayList<ArchetypeBenefit>();
+    List<ArchetypeBenefit> benefitTarget = new ArrayList<ArchetypeBenefit>();
+    
 	private DualListModel<ArchetypeBenefit> benefitDualList;
 	//TESTE
 	
 	@PostConstruct
 	public void init(){
 		//TESTE
-		List<ArchetypeBenefit> benefitSource = new ArrayList<ArchetypeBenefit>();
-        List<ArchetypeBenefit> benefitTarget = new ArrayList<ArchetypeBenefit>();
+		
          
-        benefitSource.add(service.findById(1));
-        benefitSource.add(service.findById(2));
-        benefitDualList = new DualListModel<ArchetypeBenefit>(benefitSource, benefitTarget);
+        //benefitSource.addAll(service.findAll());
+        //benefitSource.add(service.findById(2));
+		benefitSource = new ArrayList<ArchetypeBenefit>();
+		benefitTarget = new ArrayList<ArchetypeBenefit>();
+		benefitDualList = new DualListModel<ArchetypeBenefit>(benefitSource, benefitTarget);
 		//TESTE
 		
 		
@@ -65,8 +69,14 @@ public class ArchetypeBenefitController {
 			//String race = e.getNewValue().toString();
 			System.out.println("ddddddddddddddddddddddddddddddddddddddd");
 //			result = "called by " + event.getComponent().getClass().getName();
-			benefitList = new ArrayList<ArchetypeBenefit>();
-			benefitList.addAll(service.findByArchetype(archetype));
+			//benefitList = new ArrayList<ArchetypeBenefit>();
+			//benefitList.addAll(service.findByArchetype(archetype));
+			
+			benefitSource = new ArrayList<ArchetypeBenefit>();
+			benefitTarget = new ArrayList<ArchetypeBenefit>();
+			benefitDualList = new DualListModel<ArchetypeBenefit>(benefitSource, benefitTarget);
+			
+			benefitSource.addAll(service.findByArchetype(archetype));
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("44444444444444444444444444444");
