@@ -5,22 +5,22 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.direfrog.dao.RaceDAO;
+import br.com.direfrog.dao.StatsDAO;
 import br.com.direfrog.exception.DAOException;
 import br.com.direfrog.exception.ServiceException;
-import br.com.direfrog.entity.Race;
+import br.com.direfrog.entity.Stats;
 
 
 @Service
-public class RaceService {
+public class StatsService {
 	
 	@Autowired
-	RaceDAO raceDAO;
+	StatsDAO statsDAO;
 	
 	
-	public Race save(Race race) throws ServiceException{
+	public Stats save(Stats stats) throws ServiceException{
 		try{
-			return raceDAO.save(race);			
+			return statsDAO.save(stats);			
 		} catch (Exception e){
 			throw new ServiceException("Não foi Possivel Salvar", e);
 		}
@@ -31,16 +31,16 @@ public class RaceService {
 		
 	}
 	
-	public void delete(Race race) throws ServiceException{
+	public void delete(Stats stats) throws ServiceException{
 		try{
-			raceDAO.delete(race);
+			statsDAO.delete(stats);
 		}catch (DAOException e){
 			throw new ServiceException("Não foi Possivel Excluir", e);
 		}
 	}
 	
-	public Race findById(Integer id){
-		return raceDAO.findById(id);
+	public Stats findById(Integer id){
+		return statsDAO.findById(id);
 	}
 
 }

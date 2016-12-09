@@ -1,6 +1,8 @@
 package br.com.direfrog.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,11 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.OneToOne;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
@@ -31,7 +29,7 @@ public class CharSheet implements Serializable {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn
-	private Race stats;
+	private Stats stats;
 	
 	private Integer xp;
 	
@@ -76,11 +74,11 @@ public class CharSheet implements Serializable {
 	}
 
 
-	public Race getStats() {
+	public Stats getStats() {
 		return stats;
 	}
 
-	public void setStats(Race stats) {
+	public void setStats(Stats stats) {
 		this.stats = stats;
 	}
 
