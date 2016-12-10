@@ -7,8 +7,8 @@
       
 <h:head>
 <style>
-.ui-picklist-button-add,
-.ui-picklist-button-remove{
+.ui-picklist-button-add-all,
+.ui-picklist-button-remove-all{
    visibility: hidden !important;
 }
 </style>
@@ -50,7 +50,7 @@
 <p:fieldset legend="Basic" style="margin-bottom:20px">
 	Name: <h:inputText value="#{createSheetController.cs.name}" /> 
 	xp: <p:spinner  value="#{createSheetController.cs.xp}" size="2" min="0" max="150">  
-			<f:ajax event="change" render="csform" listener="#{createSheetController.defineLevel}" />
+			<f:ajax event="change" listener="#{createSheetController.defineLevel}" />
 		</p:spinner>
 	lvl: #{createSheetController.level} <br/>
 </p:fieldset>

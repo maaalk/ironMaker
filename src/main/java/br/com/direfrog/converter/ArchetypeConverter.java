@@ -19,7 +19,7 @@ public class ArchetypeConverter implements Converter{
 	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String archetype) {
-		try{			
+		try{	
 			Archetype arch = service.findByName(archetype);
 			return arch;
 		}catch (Exception e) {

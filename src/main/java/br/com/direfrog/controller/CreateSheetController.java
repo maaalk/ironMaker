@@ -72,7 +72,9 @@ public class CreateSheetController {
 		newBenefitSource();
 		newBenefitDualList();
 		
-		benefitSource.addAll(benefitService.findByArchetype(archetype));	
+		if(archetype!=null){
+			benefitSource.addAll(benefitService.findByArchetype(archetype));
+		}			
 	}
 
 	public void save() throws ControllerException{
