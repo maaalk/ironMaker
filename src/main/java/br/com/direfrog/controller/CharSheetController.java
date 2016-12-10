@@ -44,7 +44,7 @@ public class CharSheetController {
 	@PostConstruct
 	public void init() {
 		level = 0;
-		race = raceFactory.generateRace("empty");
+		//race = raceFactory.generateRace("empty");
 	}
 
 
@@ -76,7 +76,7 @@ public class CharSheetController {
 	
 	public void loadRace() {
 		System.out.println("EVENT: selected race:" + cs.getRace());
-		this.race = raceFactory.generateRace(cs.getRace());
+		//this.race = raceFactory.generateRace(cs.getRace());
 		this.stats=race.getStats();
 		this.benefitList=race.getBenefitList();
 	}
@@ -95,7 +95,7 @@ public class CharSheetController {
 
 	public void clear(){
 		cs=new CharSheet();
-		race = raceFactory.generateRace("empty");
+		//race = raceFactory.generateRace("empty");
 		level = 0;
 		
 	}

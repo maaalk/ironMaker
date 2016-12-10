@@ -35,7 +35,7 @@ public class CreateSheetController {
 	private ArchetypeService archetypeService;
 	
 	/*BEGIN: Archetype Benefit Properties*/
-	private Archetype archetype;
+	private Archetype archetype = new Archetype();
 	private List<ArchetypeBenefit> benefitSource = new ArrayList<ArchetypeBenefit>();
     private List<ArchetypeBenefit> benefitTarget = new ArrayList<ArchetypeBenefit>();    
 	private DualListModel<ArchetypeBenefit> benefitDualList;
@@ -56,7 +56,8 @@ public class CreateSheetController {
 	public void init(){
 
 		level = 0;
-		race = raceFactory.generateRace("empty");
+		//race = raceFactory.generateRace("empty");
+		race = raceFactory.generateRace("empty", null);
 		
 		archetypeList = archetypeService.findAll();
 		
@@ -66,6 +67,24 @@ public class CreateSheetController {
 		
 	}
 
+	//TESTE
+	public void load(){
+		
+		newBenefitSource();
+		newBenefitTarget();
+		newBenefitDualList();
+		
+		if(archetype!=null){
+			benefitSource.addAll(benefitService.findByArchetype(archetype));
+		}	
+		
+		this.race = raceFactory.generateRace(cs.getRace(), archetype);
+		this.stats=race.getStats();
+
+		benefitTarget.addAll(race.getBenefitList());
+		System.out.println("Benefit LIST: "+race.getBenefitList());
+	}
+	
 	//Reload the table using the Character Archetype
 	public void loadBenefitList(){
 		
@@ -75,6 +94,8 @@ public class CreateSheetController {
 		if(archetype!=null){
 			benefitSource.addAll(benefitService.findByArchetype(archetype));
 		}			
+		this.race = raceFactory.generateRace(cs.getRace(), archetype);
+		this.stats=race.getStats();
 	}
 
 	public void save() throws ControllerException{
@@ -96,7 +117,8 @@ public class CreateSheetController {
 
 	public void loadRace() {
 		System.out.println("EVENT: selected race:" + cs.getRace());
-		this.race = raceFactory.generateRace(cs.getRace());
+		//this.race = raceFactory.generateRace(cs.getRace());
+		this.race = raceFactory.generateRace(cs.getRace(), archetype);
 		this.stats=race.getStats();
 		//this.benefitList=race.getBenefitList();
 		
@@ -135,7 +157,8 @@ public class CreateSheetController {
 	
 	public void clear(){
 		cs=new CharSheet();
-		race = raceFactory.generateRace("empty");
+		//race = raceFactory.generateRace("empty");
+		race = raceFactory.generateRace("empty", null);
 		level = 0;
 		
 	}

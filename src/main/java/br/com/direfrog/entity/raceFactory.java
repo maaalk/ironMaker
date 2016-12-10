@@ -20,7 +20,7 @@ public class raceFactory {
 	     dao = this.dao0;
 	 }
 	
-	public static Race generateRace(String raceName){
+	/*public static Race generateRace(String raceName){
 	
 		Race race = new Race(raceName);
 		
@@ -72,6 +72,67 @@ public class raceFactory {
 		}
 		
 		return race;
-	}
+	}*/
 
+	 public static Race generateRace(String raceName, Archetype archetype){
+			
+			Race race = new Race(raceName);
+			
+			if (raceName.equals("human")){
+				race.getStats().setBasePhy(5);
+				race.getStats().setBaseSpd(6);
+				race.getStats().setBaseStr(4);
+				race.getStats().setBaseAgi(3);
+				race.getStats().setBasePrw(4);
+				race.getStats().setBasePoi(4);
+				race.getStats().setBaseIntel(3);
+				if(archetype.getName().equals("GIFTED")){
+					race.getStats().setBaseArc(3);
+				} else {
+					race.getStats().setBaseArc(0);
+				}
+				race.getStats().setBasePer(3);
+				
+				race.getStats().setMaxPhy((new Integer[]{7,8,8}));
+				race.getStats().setMaxSpd((new Integer[]{7,7,7}));
+				race.getStats().setMaxStr((new Integer[]{6,7,8}));
+				race.getStats().setMaxAgi((new Integer[]{5,6,7}));
+				race.getStats().setMaxPrw((new Integer[]{5,6,7}));
+				race.getStats().setMaxPoi((new Integer[]{5,6,7}));
+				race.getStats().setMaxIntel((new Integer[]{5,6,7}));
+				race.getStats().setMaxArc((new Integer[]{4,6,8}));
+				race.getStats().setMaxPer((new Integer[]{5,6,7}));			
+			}
+			
+			if (raceName.equals("trollkin")){
+				race.getStats().setBasePhy(6);
+				race.getStats().setBaseSpd(5);
+				race.getStats().setBaseStr(5);
+				race.getStats().setBaseAgi(3);
+				race.getStats().setBasePrw(4);
+				race.getStats().setBasePoi(2);
+				race.getStats().setBaseIntel(3);
+				if(archetype.getName().equals("GIFTED")){
+					race.getStats().setBaseArc(3);
+				} else {
+					race.getStats().setBaseArc(0);
+				}
+				race.getStats().setBasePer(3);
+				
+				race.getStats().setMaxPhy((new Integer[]{8,9,10}));
+				race.getStats().setMaxSpd((new Integer[]{6,6,6}));
+				race.getStats().setMaxStr((new Integer[]{7,8,9}));
+				race.getStats().setMaxAgi((new Integer[]{5,6,7}));
+				race.getStats().setMaxPrw((new Integer[]{5,6,7}));
+				race.getStats().setMaxPoi((new Integer[]{5,6,7}));
+				race.getStats().setMaxIntel((new Integer[]{4,5,6}));
+				race.getStats().setMaxArc((new Integer[]{4,6,7}));
+				race.getStats().setMaxPer((new Integer[]{4,5,6}));
+				
+				race.getBenefitList().add(dao.findByName("RACIAL"));
+				
+			}
+			
+			return race;
+		}
 }

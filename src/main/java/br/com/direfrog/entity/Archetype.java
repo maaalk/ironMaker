@@ -15,7 +15,9 @@ public class Archetype implements Serializable{
 	private Integer id;
 	private String name;
 	
-	public Archetype(){}
+	public Archetype(){
+		name="";		
+	}
 	public Archetype(String name){
 		this.name = name;
 	}

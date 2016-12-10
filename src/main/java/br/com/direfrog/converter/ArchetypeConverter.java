@@ -24,7 +24,7 @@ public class ArchetypeConverter implements Converter{
 			return arch;
 		}catch (Exception e) {
 			e.getStackTrace();
-			return null;
+			return new Archetype();
 		}	
 
 	}
