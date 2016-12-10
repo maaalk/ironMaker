@@ -109,8 +109,8 @@ public class CreateSheetController {
 		System.out.println("Benefit LIST: "+race.getBenefitList());
 	}
 
-	
-/*	public void defineLevel(ValueChangeEvent e) {
+	/*
+	public void defineLevel(ValueChangeEvent e) {
 		Integer lvl = Integer.parseInt(e.getNewValue().toString());
 		System.out.println("EVENT: lvl:" + lvl);
 		if (lvl >= 100) {
@@ -119,8 +119,8 @@ public class CreateSheetController {
 			this.level = 1;
 		} else
 			this.level = 0;
-	}*/
-
+	}
+*/
 	public void defineLevel() {
 		int lvl = cs.getXp();
 		System.out.println("EVENT: lvl:" + lvl);
