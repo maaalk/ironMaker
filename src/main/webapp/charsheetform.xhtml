@@ -16,18 +16,44 @@
 <h:body>
 <h:form>
 
+<p:fieldset legend="Archetype" style="margin-bottom:20px">
+			<h:selectOneMenu value="#{createSheetController.archetype}"
+				converter="#{archetypeConverter}">
+				<f:selectItem itemValue="" itemLabel="Select"
+					noSelectionOption="true" />
+				<f:selectItems value="#{createSheetController.archetypeList}"
+					var="archetype" itemLabel="#{archetype.name}" />
+
+				<f:ajax event="change" render="@form"
+					listener="#{createSheetController.loadBenefitList}" />
+			</h:selectOneMenu>
+
+
+			<p:growl id="msg" showDetail="true" escape="false" />
+
+			<h3 style="margin-top: 0">Basic PickList</h3>
+			<p:pickList id="pickList"
+				value="#{createSheetController.benefitDualList}" var="benefit"
+				itemLabel="#{benefit.name}" itemValue="#{benefit}" 
+				showSourceFilter="true" showTargetFilter="true" converter="#{archetypeBenefitConverter}">
+
+
+			</p:pickList>
+
+		</p:fieldset>
+
 <p:fieldset legend="Basic" style="margin-bottom:20px">
-	Name: <h:inputText value="#{csCtrl.cs.name}" /> 
-	xp: <p:spinner  value="#{csCtrl.cs.xp}" size="2" min="0" max="150" onchange="this.form.submit()" valueChangeListener="#{csCtrl.defineLevel}"/>  
-	lvl: #{csCtrl.level} <br/>
+	Name: <h:inputText value="#{createSheetController.cs.name}" /> 
+	xp: <p:spinner  value="#{createSheetController.cs.xp}" size="2" min="0" max="150" onchange="this.form.submit()" valueChangeListener="#{createSheetController.defineLevel}"/>  
+	lvl: #{createSheetController.level} <br/>
 </p:fieldset>
 
 <p:fieldset legend="Race" style="margin-bottom:20px">
-	Race: <p:selectOneMenu value="#{csCtrl.cs.race}" >
+	Race: <p:selectOneMenu value="#{createSheetController.cs.race}" >
 		<f:selectItem itemValue="empty" itemLabel="Select a race"/>
 		<f:selectItem itemValue="human" itemLabel="Human"/>
 		<f:selectItem itemValue="trollkin" itemLabel="Trollkin"/>
-		<f:ajax listener="#{csCtrl.loadRace}" render="csform"/>
+		<f:ajax listener="#{createSheetController.loadRace}" render="@form"/>
 	</p:selectOneMenu>
 	
 </p:fieldset>
@@ -49,13 +75,13 @@
     	PHY 
      </p:column>
      <p:column rowspan="2">
-    	<p:spinner size="2" value="#{csCtrl.stats.basePhy}" />  /#{csCtrl.stats.maxPhy[csCtrl.level]}
+    	<p:spinner size="2" value="#{createSheetController.stats.basePhy}" />  /#{createSheetController.stats.maxPhy[createSheetController.level]}
      </p:column>
     <p:column >
     	STR
      </p:column>
      <p:column> 
-    	<p:spinner  size="2" value="#{csCtrl.stats.baseStr}" /> /#{csCtrl.stats.maxStr[csCtrl.level]}
+    	<p:spinner  size="2" value="#{createSheetController.stats.baseStr}" /> /#{createSheetController.stats.maxStr[createSheetController.level]}
     </p:column>
   </p:row>
   <p:row>
@@ -63,7 +89,7 @@
     	SPD 
      </p:column>
      <p:column>
-    	<p:spinner size="2" value="#{csCtrl.stats.baseSpd}" /> /#{csCtrl.stats.maxSpd[csCtrl.level]}
+    	<p:spinner size="2" value="#{createSheetController.stats.baseSpd}" /> /#{createSheetController.stats.maxSpd[createSheetController.level]}
     </p:column>
   </p:row>
   <p:row>
@@ -71,13 +97,13 @@
     	AGI 
      </p:column>
      <p:column rowspan="2">
-    	<p:spinner size="2" value="#{csCtrl.stats.baseAgi}" />  /#{csCtrl.stats.maxAgi[csCtrl.level]}
+    	<p:spinner size="2" value="#{createSheetController.stats.baseAgi}" />  /#{createSheetController.stats.maxAgi[createSheetController.level]}
      </p:column>
     <p:column >
     	PRW
      </p:column>
      <p:column> 
-    	<p:spinner size="2" value="#{csCtrl.stats.basePrw}" /> /#{csCtrl.stats.maxPrw[csCtrl.level]}
+    	<p:spinner size="2" value="#{createSheetController.stats.basePrw}" /> /#{createSheetController.stats.maxPrw[createSheetController.level]}
     </p:column>
   </p:row>
   <p:row>
@@ -85,7 +111,7 @@
     	POI 
      </p:column>
      <p:column>
-    	<p:spinner size="2" value="#{csCtrl.stats.basePoi}" /> /#{csCtrl.stats.maxPoi[csCtrl.level]}
+    	<p:spinner size="2" value="#{createSheetController.stats.basePoi}" /> /#{createSheetController.stats.maxPoi[createSheetController.level]}
     </p:column>
   </p:row>
   <p:row>
@@ -93,13 +119,13 @@
     	INT 
      </p:column>
      <p:column rowspan="2">
-    	<p:spinner size="2" value="#{csCtrl.stats.baseIntel}" />  /#{csCtrl.stats.maxIntel[csCtrl.level]}
+    	<p:spinner size="2" value="#{createSheetController.stats.baseIntel}" />  /#{createSheetController.stats.maxIntel[createSheetController.level]}
      </p:column>
     <p:column >
     	ARC
      </p:column>
      <p:column> 
-    	<p:spinner size="2" value="#{csCtrl.stats.baseArc}" /> /#{csCtrl.stats.maxArc[csCtrl.level]}
+    	<p:spinner size="2" value="#{createSheetController.stats.baseArc}" /> /#{createSheetController.stats.maxArc[createSheetController.level]}
     </p:column>
   </p:row>
   <p:row>
@@ -107,14 +133,14 @@
     	PER 
      </p:column>
      <p:column>
-    	<p:spinner size="2" value="#{csCtrl.stats.basePer}" /> /#{csCtrl.stats.maxPer[csCtrl.level]}
+    	<p:spinner size="2" value="#{createSheetController.stats.basePer}" /> /#{createSheetController.stats.maxPer[createSheetController.level]}
     </p:column>
   </p:row>
 </p:panelGrid>
 </p:fieldset>
 	
-	<h:commandButton actionListener="#{csCtrl.save()}" value="Salvar" />
-	<h:commandButton actionListener="#{csCtrl.clear()}" value="Clear" />
+	<h:commandButton actionListener="#{createSheetController.save()}" value="Salvar" />
+	<h:commandButton actionListener="#{createSheetController.clear()}" value="Clear" />
 	
 </h:form>
 

@@ -25,39 +25,21 @@ public class ArchetypeBenefitController {
 	
 	private List<ArchetypeBenefit> benefitList = new ArrayList<ArchetypeBenefit>();
 	private Archetype archetype;
-	//private String result;
-	
 
-	//Added by God666
-	List<ArchetypeBenefit> benefitSource = new ArrayList<ArchetypeBenefit>();
-    List<ArchetypeBenefit> benefitTarget = new ArrayList<ArchetypeBenefit>();
+	private List<ArchetypeBenefit> benefitSource = new ArrayList<ArchetypeBenefit>();
+    private List<ArchetypeBenefit> benefitTarget = new ArrayList<ArchetypeBenefit>();
     
 	private DualListModel<ArchetypeBenefit> benefitDualList;
-	//End God666
-
 	
 	@PostConstruct
 	public void init(){
-		//Added by God666
-		
-         
-        //benefitSource.addAll(service.findAll());
-        //benefitSource.add(service.findById(2));
+
 		benefitSource = new ArrayList<ArchetypeBenefit>();
 		benefitTarget = new ArrayList<ArchetypeBenefit>();
 		benefitDualList = new DualListModel<ArchetypeBenefit>(benefitSource, benefitTarget);
 		
-		//End God666
-		
-		        
-        //Set<ArchetypeBenefit> benefitSet = new HashSet<ArchetypeBenefit>();
-		//benefitSet=service.findAll();
-		
-		//benefitList = new ArrayList<ArchetypeBenefit>();
-		//benefitList.addAll(service.findByArchetype(archetype));
-		
-		//benefitList.addAll(benefitSet);
 	}
+
 	
 	public void save(ArchetypeBenefit benefit){
 		service.save(benefit);
@@ -67,22 +49,11 @@ public class ArchetypeBenefitController {
 	//Reload the table using the Character Archetype
 	public void loadBenefitList(){
 		
-		try {
-			//String race = e.getNewValue().toString();
-			System.out.println("ddddddddddddddddddddddddddddddddddddddd");
-//			result = "called by " + event.getComponent().getClass().getName();
-			//benefitList = new ArrayList<ArchetypeBenefit>();
-			//benefitList.addAll(service.findByArchetype(archetype));
-			
-			benefitSource = new ArrayList<ArchetypeBenefit>();
-			benefitTarget = new ArrayList<ArchetypeBenefit>();
-			benefitDualList = new DualListModel<ArchetypeBenefit>(benefitSource, benefitTarget);
-			
-			benefitSource.addAll(service.findByArchetype(archetype));
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("44444444444444444444444444444");
-		}
+		benefitSource = new ArrayList<ArchetypeBenefit>();
+		benefitTarget = new ArrayList<ArchetypeBenefit>();
+		benefitDualList = new DualListModel<ArchetypeBenefit>(benefitSource, benefitTarget);
+		
+		benefitSource.addAll(service.findByArchetype(archetype));
 		
 	}
 

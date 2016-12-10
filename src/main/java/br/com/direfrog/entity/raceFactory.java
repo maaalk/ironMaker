@@ -67,7 +67,7 @@ public class raceFactory {
 			race.getStats().setMaxArc((new Integer[]{4,6,7}));
 			race.getStats().setMaxPer((new Integer[]{4,5,6}));
 			
-			race.getBenefitList().add(dao.findByName("Vendetta"));
+			race.getBenefitList().add(dao.findByName("RACIAL"));
 			
 		}
 		

@@ -20,10 +20,7 @@ public class ArchetypeConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String archetype) {
 		try{			
-			System.out.println(archetype);
-			String s = (String) archetype;
-			//return (Archetype) archetype;
-			Archetype arch = service.findByName(s);
+			Archetype arch = service.findByName(archetype);
 			return arch;
 		}catch (Exception e) {
 			e.getStackTrace();
@@ -34,7 +31,6 @@ public class ArchetypeConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object archetype) {
-		System.out.println("CONVERTER");
 		if(archetype instanceof ArchetypeBenefit){
 			Archetype arch = (Archetype) archetype;
 			return arch.getId().toString();

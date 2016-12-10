@@ -37,6 +37,14 @@ public class ArchetypeBenefit implements Serializable {
 	@JoinColumn(name="archetype_id")
 	private Archetype archetype;
 	
+	public ArchetypeBenefit(){}
+	
+	public ArchetypeBenefit(String name, String description, Archetype archetype){
+		this.name = name;
+		this.description = description;
+		this.archetype = archetype;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

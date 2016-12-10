@@ -34,9 +34,11 @@
 			<h3 style="margin-top: 0">Basic PickList</h3>
 			<p:pickList id="pickList"
 				value="#{archetypeBenefitController.benefitDualList}" var="benefit"
-				itemLabel="#{benefit.name}" itemValue="#{benefit}" />
+				itemLabel="#{benefit.name}" itemValue="#{benefit}" >
 
 
+			</p:pickList>
+			<p:commandButton actionListener="#{csCtrl.saveBenefit()}" value="Salvar"></p:commandButton>
 		</p:fieldset>
 
 

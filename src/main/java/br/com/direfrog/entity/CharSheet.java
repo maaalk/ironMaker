@@ -49,6 +49,10 @@ public class CharSheet implements Serializable {
 		benefitList.add(benefit);
 	}
 	
+	public void addAllArchetypeBenefit(Set<ArchetypeBenefit> benefits){
+		benefitList.addAll(benefits);
+	}
+	
 	public Integer getId() {
 		return id;
 	}
