@@ -100,13 +100,27 @@ public class CreateSheetController {
 		
 		newBenefitTarget();
 		newBenefitDualList();
+		/*List<ArchetypeBenefit> list = new ArrayList<ArchetypeBenefit>();
+		list.addAll(race.getBenefitList());
+		benefitDualList.setTarget(list);*/
 		benefitTarget.addAll(race.getBenefitList());
 		System.out.println("Benefit LIST: "+race.getBenefitList());
 	}
 
 	
-	public void defineLevel(ValueChangeEvent e) {
+/*	public void defineLevel(ValueChangeEvent e) {
 		Integer lvl = Integer.parseInt(e.getNewValue().toString());
+		System.out.println("EVENT: lvl:" + lvl);
+		if (lvl >= 100) {
+			this.level = 2;
+		} else if (lvl >= 50) {
+			this.level = 1;
+		} else
+			this.level = 0;
+	}*/
+
+	public void defineLevel() {
+		int lvl = cs.getXp();
 		System.out.println("EVENT: lvl:" + lvl);
 		if (lvl >= 100) {
 			this.level = 2;
@@ -116,6 +130,7 @@ public class CreateSheetController {
 			this.level = 0;
 	}
 
+	
 	public void clear(){
 		cs=new CharSheet();
 		race = raceFactory.generateRace("empty");

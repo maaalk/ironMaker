@@ -49,7 +49,9 @@
 
 <p:fieldset legend="Basic" style="margin-bottom:20px">
 	Name: <h:inputText value="#{createSheetController.cs.name}" /> 
-	xp: <p:spinner  value="#{createSheetController.cs.xp}" size="2" min="0" max="150" onchange="this.form.submit()" valueChangeListener="#{createSheetController.defineLevel}"/>  
+	xp: <p:spinner  value="#{createSheetController.cs.xp}" size="2" min="0" max="150">  
+			<f:ajax event="change" render="csform" listener="#{createSheetController.defineLevel}" />
+		</p:spinner>
 	lvl: #{createSheetController.level} <br/>
 </p:fieldset>
 
