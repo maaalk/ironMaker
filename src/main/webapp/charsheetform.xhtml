@@ -6,10 +6,15 @@
       xmlns:p="http://primefaces.org/ui">
       
 <h:head>
+<style>
+.ui-picklist-button-add,
+.ui-picklist-button-remove{
+   visibility: hidden !important;
+}
+</style>
 <meta charset="ISO-8859-1"/>
 <title>Criar Ficha</title>
 <script type="text/javascript">  
-  //Script JS  
 </script>  
 </h:head>
 
@@ -32,6 +37,7 @@
 			<p:growl id="msg" showDetail="true" escape="false" />
 
 			<h3 style="margin-top: 0">Basic PickList</h3>
+
 			<p:pickList id="pickList"
 				value="#{createSheetController.benefitDualList}" var="benefit"
 				itemLabel="#{benefit.name}" itemValue="#{benefit}" 
@@ -39,7 +45,6 @@
 
 
 			</p:pickList>
-
 		</p:fieldset>
 
 <p:fieldset legend="Basic" style="margin-bottom:20px">
@@ -53,7 +58,7 @@
 		<f:selectItem itemValue="empty" itemLabel="Select a race"/>
 		<f:selectItem itemValue="human" itemLabel="Human"/>
 		<f:selectItem itemValue="trollkin" itemLabel="Trollkin"/>
-		<f:ajax listener="#{createSheetController.loadRace}" render="@form"/>
+		<f:ajax listener="#{createSheetController.loadRace}" render="csform pickList"/>
 	</p:selectOneMenu>
 	
 </p:fieldset>
