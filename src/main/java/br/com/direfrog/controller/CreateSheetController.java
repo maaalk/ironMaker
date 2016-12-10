@@ -2,6 +2,7 @@ package br.com.direfrog.controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -35,7 +36,7 @@ public class CreateSheetController {
 	private ArchetypeService archetypeService;
 	
 	/*BEGIN: Archetype Benefit Properties*/
-	private Archetype archetype = new Archetype();
+	private Archetype archetype = new Archetype("");
 	private List<ArchetypeBenefit> benefitSource = new ArrayList<ArchetypeBenefit>();
     private List<ArchetypeBenefit> benefitTarget = new ArrayList<ArchetypeBenefit>();    
 	private DualListModel<ArchetypeBenefit> benefitDualList;
@@ -67,21 +68,23 @@ public class CreateSheetController {
 		
 	}
 
-	//TESTE
-	public void load(){
-		
+	public void loadTrait(){
+		System.out.println("LOAD TRAIT");
 		newBenefitSource();
 		newBenefitTarget();
 		newBenefitDualList();
-		
-		if(archetype!=null){
-			benefitSource.addAll(benefitService.findByArchetype(archetype));
-		}	
 		
 		this.race = raceFactory.generateRace(cs.getRace(), archetype);
 		this.stats=race.getStats();
 
 		benefitTarget.addAll(race.getBenefitList());
+		
+		if(!archetype.getName().equals("")){
+			benefitSource.addAll(benefitService.findByArchetype(archetype));		
+		}	
+		
+		
+		//benefitTarget.addAll(race.getBenefitList());
 		System.out.println("Benefit LIST: "+race.getBenefitList());
 	}
 	
@@ -91,11 +94,11 @@ public class CreateSheetController {
 		newBenefitSource();
 		newBenefitDualList();
 		
-		if(archetype!=null){
+		if(archetype.getName().equals("")){
+			System.out.println("LOAD BENEFIT LIST");
 			benefitSource.addAll(benefitService.findByArchetype(archetype));
 		}			
-		this.race = raceFactory.generateRace(cs.getRace(), archetype);
-		this.stats=race.getStats();
+		defineRacialStats();
 	}
 
 	public void save() throws ControllerException{
@@ -118,15 +121,15 @@ public class CreateSheetController {
 	public void loadRace() {
 		System.out.println("EVENT: selected race:" + cs.getRace());
 		//this.race = raceFactory.generateRace(cs.getRace());
-		this.race = raceFactory.generateRace(cs.getRace(), archetype);
-		this.stats=race.getStats();
+		/*this.race = raceFactory.generateRace(cs.getRace(), archetype);
+		this.stats=race.getStats();*/
 		//this.benefitList=race.getBenefitList();
+
+		defineRacialStats();
 		
 		newBenefitTarget();
 		newBenefitDualList();
-		/*List<ArchetypeBenefit> list = new ArrayList<ArchetypeBenefit>();
-		list.addAll(race.getBenefitList());
-		benefitDualList.setTarget(list);*/
+
 		benefitTarget.addAll(race.getBenefitList());
 		System.out.println("Benefit LIST: "+race.getBenefitList());
 	}
@@ -291,6 +294,11 @@ public class CreateSheetController {
 	}
 	private void newBenefitDualList(){
 		benefitDualList = new DualListModel<ArchetypeBenefit>(benefitSource, benefitTarget);
+	}
+	
+	private void defineRacialStats(){
+		this.race = raceFactory.generateRace(cs.getRace(), archetype);
+		this.stats=race.getStats();
 	}
 	
 }

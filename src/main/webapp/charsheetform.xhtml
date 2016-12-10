@@ -36,7 +36,7 @@
 		<f:selectItem itemValue="empty" itemLabel="Select a race"/>
 		<f:selectItem itemValue="human" itemLabel="Human"/>
 		<f:selectItem itemValue="trollkin" itemLabel="Trollkin"/>
-		<f:ajax listener="#{createSheetController.load}" render="csform pickList"/>
+		<f:ajax listener="#{createSheetController.loadRace}" render="csform pickList"/>
 	</p:selectOneMenu>
 	
 </p:fieldset>
@@ -131,7 +131,7 @@
 					var="archetype" itemLabel="#{archetype.name}" />
 
 				<f:ajax event="change" render="@form csform"
-					listener="#{createSheetController.load}" />
+					listener="#{createSheetController.loadBenefitList}" />
 			</h:selectOneMenu>
 
 
