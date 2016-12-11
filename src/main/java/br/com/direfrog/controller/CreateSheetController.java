@@ -74,13 +74,13 @@ public class CreateSheetController {
 		newBenefitTarget();
 		newBenefitDualList();
 		
-		this.race = raceFactory.generateRace(cs.getRace(), archetype);
-		this.stats=race.getStats();
+		defineRacialStats();
 
 		benefitTarget.addAll(race.getBenefitList());
 		
 		if(!archetype.getName().equals("")){
-			benefitSource.addAll(benefitService.findByArchetype(archetype));		
+			benefitSource.addAll(benefitService.findByArchetype(archetype));
+			benefitSource.removeAll(benefitTarget);
 		}	
 		
 		
